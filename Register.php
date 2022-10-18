@@ -13,10 +13,10 @@ include 'PHPFiles/RegisterPHP.php';
 	<meta name="keywords" content="">
 	<meta name="author" content="Raims" />
 	<!-- Favicon icon -->
-	<link rel="icon" href="resources/assets/images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="resources\template\assets\AuthAssets\images/favicon.ico" type="image/x-icon">
 
 	<!-- vendor css -->
-	<link rel="stylesheet" href="resources/assets/css/style.css">
+	<link rel="stylesheet" href="resources\template\assets\AuthAssets\css/style.css">
 
 </head>
 <div class="auth-wrapper align-items-stretch aut-bg-img">
@@ -25,25 +25,21 @@ include 'PHPFiles/RegisterPHP.php';
 			<div class="col-sm-10 auth-content w-auto">
 				<img src="assets/images/auth/auth-logo.png" alt="" class="img-fluid">
 				<h1 class="text-white my-4">Welcome you!</h1>
-				<h4 class="text-white font-weight-normal">Signup to your account and made member of the Able pro Dashboard Template.<br/>Do not forget to play with live customizer</h4>
+				<h4 class="text-white font-weight-normal">Signup to your account and get access to all available jobs on our Job Portal.</h4>
 			</div>
 		</div>
 		<div class="auth-side-form">
             <form method="post">
 			<div class=" auth-content">
-				<img src="resources/assets/images/auth/auth-logo-dark.png" alt="" class="img-fluid mb-4 d-block d-xl-none d-lg-none">
+				<img src="resources\template\assets\AuthAssets\images/auth/auth-logo-dark.png" alt="" class="img-fluid mb-4 d-block d-xl-none d-lg-none">
 				<h4 class="mb-3 f-w-400">Sign up</h4>
 				<div class="form-group mb-3">
-					<label class="floating-label" for="Username">Username</label>
-					<input type="text" class="form-control" id="Username" placeholder="">
-				</div>
-				<div class="form-group mb-3">
 					<label class="floating-label" for="Email">Email address</label>
-					<input type="text" class="form-control" id="Email" placeholder="">
+					<input type="text" class="form-control" name="u-email" id="u-email" required placeholder="">
 				</div>
 				<div class="form-group mb-4">
 					<label class="floating-label" for="Password">Password</label>
-					<input type="password" class="form-control" id="Password" placeholder="">
+					<input type="password" class="form-control" name="u-password" id="u-password" placeholder="" required>
 				</div>
 				<button type="submit" name="reg" class="btn btn-primary btn-block mb-4">Sign up</button>
 				<div class="text-center">
@@ -78,10 +74,10 @@ include 'PHPFiles/RegisterPHP.php';
 
 
 <!-- Required Js -->
-<script src="resources/assets/js/vendor-all.min.js"></script>
-<script src="resources/assets/js/plugins/bootstrap.min.js"></script>
-<script src="resources/assets/js/ripple.js"></script>
-<script src="resources/assets/js/pcoded.min.js"></script>
+<script src="resources\template\assets\AuthAssets\js/vendor-all.min.js"></script>
+<script src="resources\template\assets\AuthAssets\js/plugins/bootstrap.min.js"></script>
+<script src="resources\template\assets\AuthAssets\js/ripple.js"></script>
+<script src="resources\template\assets\AuthAssets\js/pcoded.min.js"></script>
 
 
 </body>

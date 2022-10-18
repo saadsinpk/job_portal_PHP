@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+include './resources/DBconnection/config.php';
+
 if ($_SESSION["U-Email"] == null) {
     header('Location: Login.php');
 }
@@ -30,10 +32,9 @@ if ($_SESSION["U-Email"] == null) {
 
 
     <?php
-    $conn = mysqli_connect('localhost', 'root', '', 'job_portal');
 
     $q = "Select * from joblist";
-    $result = mysqli_query($conn, $q);
+    $result = mysqli_query($link, $q);
 
     ?>
 
@@ -105,14 +106,13 @@ if ($_SESSION["U-Email"] == null) {
 
 
     <?php
-    $conn = mysqli_connect('localhost', 'root', '', 'job_portal');
 
     if (isset($_GET['id'])) {
 
         $id = $_GET['id'];
 
         $q = "Delete from joblist where JobId ='$id'";
-        $check = mysqli_query($conn, $q);
+        $check = mysqli_query($link, $q);
     }
 
     ?>
