@@ -1,100 +1,114 @@
 <?php
 include 'PHPFiles/PostJobPHP.php';
+include './resources/template/head/dashHead.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Advertise Job</h1>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Job Details</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form method="post">
 
-</head>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Location</label>
+                                    <input type="text" class="form-control" name="location" id="location" placeholder="Location" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Select Days: </label>
+                                    <select class="selectpicker" data-mdb-placeholder="Select Days" name="days" id="days" multiple data-live-search="true" required>
+                                        <option value="Mon">Monday</option>
+                                        <option value="Tue">Tuesday</option>
+                                        <option value="Wed">Wednesday</option>
+                                        <option value="Thurs">Thursday</option>
+                                        <option value="Fri">Friday</option>
+                                        <option value="Sat">Saturday</option>
+                                        <option value="Sun">Sunday</option>
+                                    </select>
+                                    <input type="text" name="selecteddays" id="selecteddays" hidden>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Select Hours</label>
+                                    <input type="text" class="form-control" name="hours" id="hours" placeholder="Hours" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Job Position</label>
+                                    <select onchange="yesnoCheck(this);" class="selectpicker" data-mdb-placeholder="Select Days" name="position" id="position" data-live-search="true" required>
+                                        <option value="Age Care Facilities">Age Care Facilities</option>
+                                        <option value="RSA Work">RSA Work</option>
+                                        <option value="GateHouse">GateHouse</option>
+                                        <option value="Retail Rover">Retail Rover</option>
+                                        <option value="Retail Shopping Centre">Retail Shopping Centre</option>
+                                        <option value="General Static">General Static</option>
+                                        <option value="Other ( Name )">Other ( Name )</option>
+                                    </select>
+                                    <input type="text" class="form-control" name="positions" id="positions" placeholder="Other Position" style="display:none;">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Pay</label>
+                                    <input type="text" class="form-control" name="pay" id="pay" placeholder="PAY" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Description</label>
+                                    <input type="text" name="desc" id="desc" placeholder="Description" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Master License No</label>
+                                    <input type="text" name="MLnum" id="MLnum" placeholder="Master License No" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Status</label>
+                                    <select class="selectpicker" data-mdb-placeholder="Select Job Status" name="status" id="status" required>
+                                        <option value="Available">Available</option>
+                                        <option value="No Vacancies">No Vacancies</option>
+                                    </select>
+                                </div>
 
-<body>
+                            </div>
+                            <!-- /.card-body -->
 
-<br>
-<a href="ManageJobListing.php" >Manage Jobs</a> <br><br>
-
-    <form method="post">
-
-        <input type="text" name="location" id="location" placeholder="Location" required><br><br>
-
-        <select class="selectpicker" data-mdb-placeholder="Select Days" name="days" id="days" multiple
-            data-live-search="true" required>
-            <option value="Mon">Monday</option>
-            <option value="Tue">Tuesday</option>
-            <option value="Wed">Wednesday</option>
-            <option value="Thurs">Thursday</option>
-            <option value="Fri">Friday</option>
-            <option value="Sat">Saturday</option>
-            <option value="Sun">Sunday</option>
-        </select><br><br>
-        <input type="text" name="selecteddays" id="selecteddays" hidden>
-        <br><br>
-        <input type="text" name="hours" id="hours" placeholder="Hours" required><br><br>
-
-        <select onchange="yesnoCheck(this);" class="selectpicker" data-mdb-placeholder="Select Days" name="position"
-            id="position" data-live-search="true" required>
-            <option value="Age Care Facilities">Age Care Facilities</option>
-            <option value="RSA Work">RSA Work</option>
-            <option value="GateHouse">GateHouse</option>
-            <option value="Retail Rover">Retail Rover</option>
-            <option value="Retail Shopping Centre">Retail Shopping Centre</option>
-            <option value="General Static">General Static</option>
-            <option value="Other ( Name )">Other ( Name )</option>
-        </select><br><br>
-        <input type="text" name="positions" id="positions" placeholder="Positions" style="display:none;"
-            ><br><br>
-
-        <input type="text" name="pay" id="pay" placeholder="PAY" required><br><br>
-        <input type="text" name="desc" id="desc" placeholder="Description" required><br><br>
-        <input type="text" name="MLnum" id="MLnum" placeholder="Master License No" required><br><br>
-
-        <select class="selectpicker" data-mdb-placeholder="Select Job Status" name="status" id="status" required>
-            <option value="Available">Available</option>
-            <option value="No Vacancies">No Vacancies</option>
-        </select><br><br>
-
-        <input type="submit" id="postJob" name="postJob" value="Post Job">
-
-    </form>
-
-    <script>
-        $(document).ready(function () {
-            $('#postJob').click(function () {
-                var selected = $("#days :selected").map((_, e) => e.value).get();
-                $("#selecteddays").val(selected);
-            });
-        });
-
-        $('select').selectpicker();
-
-
-        function yesnoCheck(that) {
-            if (that.value == "Other ( Name )") {
-                document.getElementById("positions").style.display = "block";
-                document.getElementById("positions").setAttribute('required', '');
+                            <div class="card-footer">
+                                <button type="submit" id="postJob" name="postJob" class="btn btn-primary">POST JOB</button>
+                            </div>
 
 
-                var data = document.getElementById("positions").value;
-                document.getElementById("position").innerHtml = data;
 
 
-            } else {
-                document.getElementById("positions").style.display = "none";
-            }
-        }
-    </script>
+                            
 
-</body>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 
-</html>
+
+<?php
+
+include './resources/template/footer/dashFoot.php';
+?>

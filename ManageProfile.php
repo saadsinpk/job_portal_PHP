@@ -1,7 +1,7 @@
 <?php
 session_start();
-include './resources/DBconnection/config.php';
 include './resources/template/head/dashHead.php';
+include './PHPFiles/ManageProfilePHP.php';
 
 if ($_SESSION["U-Email"] == null) {
     header('Location: Login.php');
@@ -24,6 +24,15 @@ $data = $result['Uid'];
 if ($uid != $data) {
     header('Location: CreateProfile.php');
 }
+
+
+if ($uid == $data) {
+
+    $qu = "SELECT `FirstName`, `LastName`, `ContactNo`, `DriversLicense`, `SecurityLicense`, `CovidVacc`, `FirstAid`, `RSALicense`, `ProfileImage`, `Uid` FROM `userinfo` WHERE $uid";
+    $result = mysqli_query($link, $qu);
+    $row = mysqli_fetch_array($result);
+}
+
 ?>
 
 <div class="content-wrapper">
@@ -32,13 +41,7 @@ if ($uid != $data) {
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Profile</a></li>
-                        <li class="breadcrumb-item active">Dashboard v3</li>
-                    </ol>
+                    <h1 class="m-0">Settings</h1>
                 </div>
             </div>
         </div>
@@ -48,115 +51,163 @@ if ($uid != $data) {
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
-                    <div class="card card-outline card-primary">
-                        <div class="card-header text-center">
-                            <a href="#" class="h2"><b>Update</b> Profile</a>
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Update Profile</h3>
                         </div>
-                        <div class="card-body">
-                            <form method="post" enctype="multipart/form-data">
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" id="fname" name="fname" value="<?php echo $row['FirstName']; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" id="lname" name="lname" value="<?php echo $row['LastName']; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Contact No</label>
+                                    <input type="number" class="form-control" id="contact" name="contact" value="<?php echo $row['ContactNo']; ?>">
+                                </div>
+
                                 <div class="row">
-                                    <div class="input-group mb-2">
-                                        <input type="text" class="form-control" name="u-fname" id="u-fname" placeholder="First Name" value="<?php echo $result['FirstName'] ?>" required>
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-user"></span>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Profile Picture</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="pp" name="pp" value="<?php echo $row['ProfileImage']; ?>">
+                                                    <label class="custom-file-label"><?php echo $row['ProfileImage']; ?></label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">Upload</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="input-group mb-2">
-                                        <input type="text" class="form-control" name="u-lname" id="u-lname" placeholder="Last Name" value="<?php echo $result['LastName'] ?>" required>
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-user"></span>
+                                    <div class="col-md-6">
+                                        <img src="images/ProfilePicture/<?php echo $row['ProfileImage']; ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="img.png" style="height: 150px;">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Driver License</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="dl" name="dl" value="<?php echo $row['DriversLicense']; ?>">
+                                                    <label class="custom-file-label"><?php echo $row['DriversLicense']; ?></label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">Upload</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="input-group mb-2">
-                                        <input type="number" class="form-control" name="u-contact" id="u-contact" required placeholder="Contact No" value="<?php echo $result['ContactNo'] ?>">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-phone"></span>
-                                            </div>
-                                        </div>
+
+                                    <div class="col-md-6">
+                                        <img src="images/DrivingLicense/<?php echo $row['DriversLicense']; ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="img.png" style="height: 150px;">
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group mb-2">
-                                            <div class="custom-dropify">
-                                                <input type="hidden" id="oldImage" value="<?php echo $result['DriversLicense'] ?>">
-
-                                                <input type="file" class="custom-file-input dropify" name="u-driverLicense" id="u-driverLicense" required>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Security License</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="sl" name="sl" value="<?php echo $row['SecurityLicense']; ?>">
+                                                    <label class="custom-file-label"><?php echo $row['SecurityLicense']; ?></label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">Upload</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="input-group mb-2">
-                                            <div class="custom-dropify">
-                                                <input type="hidden" id="oldImage1" value="<?php echo $result['SecurityLicense'] ?>">
 
-                                                <input type="file" class="custom-file-input dropify"  name="u-securityLicense" id="u-securityLicense" required>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-6">
+                                        <img src="images/SecurityLicense/<?php echo $row['SecurityLicense']; ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="img.png" style="height: 150px;">
                                     </div>
                                 </div>
+
                                 <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group mb-2">
-                                            <div class="custom-dropify">
-                                                <input type="hidden" id="oldImage2" value="<?php echo $result['CovidVacc'] ?>">
-
-                                                <input type="file" class="custom-file-input dropify" name="u-covidVacc" id="u-covidVacc" required>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Covid Vaccination</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" value="<?php echo $row['CovidVacc']; ?>" id="cv" name="cv">
+                                                    <label class="custom-file-label"><?php echo $row['CovidVacc']; ?></label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">Upload</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="input-group mb-2">
-                                            <div class="custom-dropify">
-                                                <input type="hidden" id="oldImage3" value="<?php echo $result['FirstAid'] ?>">
 
-                                                <input type="file" class="custom-file-input dropify" name="u-firstAid" id="u-firstAid"  required>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-6">
+                                        <img src="images/CovidVacc/<?php echo $row['CovidVacc']; ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="img.png" style="height: 150px;">
                                     </div>
                                 </div>
+
+
                                 <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group mb-2">
-                                            <div class="custom-dropify">
-                                                <input type="hidden" id="oldImage4" value="<?php echo $result['RSALicense'] ?>">
-
-                                                <input type="file" class="custom-file-input dropify" name="u-RSALicense" id="u-RSALicense"  required>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>First Aid</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="fa" name="fa" value="<?php echo $row['FirstAid']; ?>">
+                                                    <label class="custom-file-label"><?php echo $row['FirstAid']; ?></label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">Upload</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="input-group mb-2">
-                                            <div class="custom-dropify">
-                                                <input type="hidden" id="oldImage5" value="<?php echo $result['ProfileImage'] ?>">
-
-                                                <input type="file" class="custom-file-input dropify" name="u-profileImg" id="u-profileImg" required>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-6">
+                                        <img src="images/FirstAid/<?php echo $row['FirstAid']; ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="img.png" style="height: 150px;">
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>RSA</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="rsa" name="rsa" value="<?php echo $row['RSALicense']; ?>">
+                                                    <label class="custom-file-label"><?php echo $row['RSALicense']; ?></label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">Upload</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                        </div>
+                                    <div class="col-md-6">
+                                        <img src="images/RSA/<?php echo $row['RSALicense']; ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="img.png" style="height: 150px;">
+                                    </div>
+                                </div>
 
-
-
-
-                        <div class="row">
-                            <div class="col-12">
-                                <button type="submit" name="create" class="btn btn-primary btn-block">Create Profile</button>
                             </div>
-                        </div>
+                            <!-- /.card-body -->
+
+                            <div class="card-footer">
+                                <button type="submit" name="update" id="update" class="btn btn-primary">UPDATE</button>
+                            </div>
                         </form>
                     </div>
-
+                    <!-- /.card -->
                 </div>
             </div>
 

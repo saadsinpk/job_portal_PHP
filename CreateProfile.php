@@ -10,6 +10,13 @@ include 'resources/template/head/head.php';
         </div>
         <div class="card-body">
             <p class="login-box-msg">Setup Profile</p>
+            <?php
+            if (isset($_SESSION['CRmessage'])) {
+            ?>
+
+                <p class="login-box-msg text-success" style="font-size: 12px;margin-top: -10px;"><?php echo $_SESSION['CRmessage'] ?></p>
+
+            <?php unset($_SESSION['CRmessage']); } ?>
             <form method="post" enctype="multipart/form-data">
                 <div class="input-group mb-2">
                     <input type="text" class="form-control" name="u-fname" id="u-fname" placeholder="First Name" required>
@@ -67,7 +74,7 @@ include 'resources/template/head/head.php';
                 </div>
                 <div class="input-group mb-2">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="u-profileImg" id="u-profileImg" required> 
+                        <input type="file" class="custom-file-input" name="u-profileImg" id="u-profileImg" required>
                         <label class="custom-file-label" for="exampleInputFile">Profile Picture</label>
                     </div>
                 </div>

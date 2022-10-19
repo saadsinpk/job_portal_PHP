@@ -1,10 +1,8 @@
-
-
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2022-2023 <a href="#">JobPortal</a>.</strong>
-    All rights reserved.
-  </footer>
+<!-- Main Footer -->
+<footer class="main-footer">
+  <strong>Copyright &copy; 2022-2023 <a href="#">JobPortal</a>.</strong>
+  All rights reserved.
+</footer>
 </div>
 <!-- ./wrapper -->
 
@@ -34,10 +32,15 @@
 <script src="resources\assets\plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="resources\assets\plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+
+<script src="resources\assets\plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
 <script>
-  $(function () {
+  $(function() {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
@@ -50,243 +53,46 @@
     });
   });
 </script>
-<script src="resources\dropify.min.js"></script>
-
 <script>
-$('.dropify').dropify();
+  $("#myElem").show().delay(5000).fadeOut();
 </script>
 
 <script>
-
-// === Set old image in Dropify preview ===
-(function DL() {
-    let oldImage = $('.custom-dropify #oldImage').val();
-    let imageSrc = "images/DrivingLicense/" + oldImage;
-
-    $(".custom-dropify .dropify-preview").css("display", "block")
-    $(".custom-dropify .dropify-wrapper .dropify-clear").css("display", "block")
-
-    $(".custom-dropify .dropify-render").html(`<img src='${imageSrc}' >`);
-
-    $(".custom-dropify .dropify-wrapper input").removeAttr("required")
-    
-
-    $(document).on('click', '.custom-dropify .dropify-clear', function (e) {
-
-      $(".custom-dropify .dropify-wrapper .dropify-clear").css("display", "none")
-      $(".custom-dropify .dropify-preview").css("display", "none")
-
-      $(".custom-dropify .dropify-wrapper input").attr("required")
-
-      $(".custom-dropify #oldImage").removeAttr("value")
-
-    });
-
-    $(document).on('click', '.custom-dropify .dropify-wrapper input', function (e) {
-
-
-      $(".custom-dropify .dropify-wrapper input").attr("required")
-
-      $(".custom-dropify #oldImage").removeAttr("value")
-      $(".custom-dropify .dropify-preview").css("display", "none")
-
-    });
-
-  })();
-  // === Set old image in Dropify preview ===
-(function SL() {
-    let oldImage1 = $('.custom-dropify #oldImage1').val();
-    let imageSrc1 = "images/SecurityLicense/" + oldImage1;
-
-    $(".custom-dropify .dropify-preview").css("display", "block")
-    $(".custom-dropify .dropify-wrapper .dropify-clear").css("display", "block")
-
-    $(".custom-dropify .dropify-render").html(`<img src='${imageSrc1}' >`);
-
-    $(".custom-dropify .dropify-wrapper input").removeAttr("required")
-    
-
-    $(document).on('click', '.custom-dropify .dropify-clear', function (e) {
-
-      $(".custom-dropify .dropify-wrapper .dropify-clear").css("display", "none")
-      $(".custom-dropify .dropify-preview").css("display", "none")
-
-      $(".custom-dropify .dropify-wrapper input").attr("required")
-
-      $(".custom-dropify #oldImage").removeAttr("value")
-
-    });
-
-    $(document).on('click', '.custom-dropify .dropify-wrapper input', function (e) {
-
-
-      $(".custom-dropify .dropify-wrapper input").attr("required")
-
-      $(".custom-dropify #oldImage").removeAttr("value")
-      $(".custom-dropify .dropify-preview").css("display", "none")
-
-    });
-
-  })();
-  // === Set old image in Dropify preview ===
-(function CV() {
-    let oldImage2 = $('.custom-dropify #oldImage2').val();
-    let imageSrc2 = "images/CovidVacc" + oldImage2;
-
-    $(".custom-dropify .dropify-preview").css("display", "block")
-    $(".custom-dropify .dropify-wrapper .dropify-clear").css("display", "block")
-
-    $(".custom-dropify .dropify-render").html(`<img src='${imageSrc2}' >`);
-
-    $(".custom-dropify .dropify-wrapper input").removeAttr("required")
-    
-
-    $(document).on('click', '.custom-dropify .dropify-clear', function (e) {
-
-      $(".custom-dropify .dropify-wrapper .dropify-clear").css("display", "none")
-      $(".custom-dropify .dropify-preview").css("display", "none")
-
-      $(".custom-dropify .dropify-wrapper input").attr("required")
-
-      $(".custom-dropify #oldImage").removeAttr("value")
-
-    });
-
-    $(document).on('click', '.custom-dropify .dropify-wrapper input', function (e) {
-
-
-      $(".custom-dropify .dropify-wrapper input").attr("required")
-
-      $(".custom-dropify #oldImage").removeAttr("value")
-      $(".custom-dropify .dropify-preview").css("display", "none")
-
-    });
-
-  })();
-  // === Set old image in Dropify preview ===
-(function FA() {
-    let oldImage3 = $('.custom-dropify #oldImage3').val();
-    let imageSrc3 = "images/DrivingLicense/" + oldImage3;
-
-    $(".custom-dropify .dropify-preview").css("display", "block")
-    $(".custom-dropify .dropify-wrapper .dropify-clear").css("display", "block")
-
-    $(".custom-dropify .dropify-render").html(`<img src='${imageSrc3}' >`);
-
-    $(".custom-dropify .dropify-wrapper input").removeAttr("required")
-    
-
-    $(document).on('click', '.custom-dropify .dropify-clear', function (e) {
-
-      $(".custom-dropify .dropify-wrapper .dropify-clear").css("display", "none")
-      $(".custom-dropify .dropify-preview").css("display", "none")
-
-      $(".custom-dropify .dropify-wrapper input").attr("required")
-
-      $(".custom-dropify #oldImage").removeAttr("value")
-
-    });
-
-    $(document).on('click', '.custom-dropify .dropify-wrapper input', function (e) {
-
-
-      $(".custom-dropify .dropify-wrapper input").attr("required")
-
-      $(".custom-dropify #oldImage").removeAttr("value")
-      $(".custom-dropify .dropify-preview").css("display", "none")
-
-    });
-
-  })();
-
-  (function RSA() {
-    let oldImage4 = $('.custom-dropify #oldImage4').val();
-    let imageSrc4 = "images/RSA/" + oldImage4;
-
-    $(".custom-dropify .dropify-preview").css("display", "block")
-    $(".custom-dropify .dropify-wrapper .dropify-clear").css("display", "block")
-
-    $(".custom-dropify .dropify-render").html(`<img src='${imageSrc4}' >`);
-
-    $(".custom-dropify .dropify-wrapper input").removeAttr("required")
-    
-
-    $(document).on('click', '.custom-dropify .dropify-clear', function (e) {
-
-      $(".custom-dropify .dropify-wrapper .dropify-clear").css("display", "none")
-      $(".custom-dropify .dropify-preview").css("display", "none")
-
-      $(".custom-dropify .dropify-wrapper input").attr("required")
-
-      $(".custom-dropify #oldImage").removeAttr("value")
-
-    });
-
-    $(document).on('click', '.custom-dropify .dropify-wrapper input', function (e) {
-
-
-      $(".custom-dropify .dropify-wrapper input").attr("required")
-
-      $(".custom-dropify #oldImage").removeAttr("value")
-      $(".custom-dropify .dropify-preview").css("display", "none")
-
-    });
-
-  })();
-
-  (function PP() {
-    let oldImage5 = $('.custom-dropify #oldImage5').val();
-    let imageSrc5 = "images/ProfilePicture/" + oldImage5;
-
-    $(".custom-dropify .dropify-preview").css("display", "block")
-    $(".custom-dropify .dropify-wrapper .dropify-clear").css("display", "block")
-
-    $(".custom-dropify .dropify-render").html(`<img src='${imageSrc5}' >`);
-
-    $(".custom-dropify .dropify-wrapper input").removeAttr("required")
-    
-
-    $(document).on('click', '.custom-dropify .dropify-clear', function (e) {
-
-      $(".custom-dropify .dropify-wrapper .dropify-clear").css("display", "none")
-      $(".custom-dropify .dropify-preview").css("display", "none")
-
-      $(".custom-dropify .dropify-wrapper input").attr("required")
-
-      $(".custom-dropify #oldImage").removeAttr("value")
-
-    });
-
-    $(document).on('click', '.custom-dropify .dropify-wrapper input', function (e) {
-
-
-      $(".custom-dropify .dropify-wrapper input").attr("required")
-
-      $(".custom-dropify #oldImage").removeAttr("value")
-      $(".custom-dropify .dropify-preview").css("display", "none")
-
-    });
-    PP();
-  });
-
+$(function () {
+  bsCustomFileInput.init();
+});
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
 
+<script>
+    $(document).ready(function() {
+        $('#postJob').click(function() {
+            var selected = $("#days :selected").map((_, e) => e.value).get();
+            $("#selecteddays").val(selected);
+        });
+    });
+
+    $('select').selectpicker();
 
 
+    function yesnoCheck(that) {
+        if (that.value == "Other ( Name )") {
+            document.getElementById("positions").style.display = "block";
+            document.getElementById("positions").setAttribute('required', '');
 
 
+            var data = document.getElementById("positions").value;
+            document.getElementById("position").innerHtml = data;
 
 
-
-
-
-
-
-
-
-
+        } else {
+            document.getElementById("positions").style.display = "none";
+        }
+    }
+</script>
 
 
 </body>
+
 </html>

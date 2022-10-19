@@ -3,12 +3,24 @@
 
 session_start();
 
+include './resources/DBconnection/config.php';
+
 if($_SESSION["U-Email"] == null){
     header('Location: Login.php');
 }
 
 
-    $conn = mysqli_connect('localhost','root','','job_portal');
+$q =  "Select * from users Where uemail = '".$_SESSION["U-Email"]."'";
+$ch = mysqli_query($link,$q);
+$res = mysqli_fetch_array($ch);
+
+
+$uid = $res['Uid'];
+
+$q2 =  "Select * from userinfo Where Uid = '$uid'";
+$check = mysqli_query($link,$q2);
+$result= mysqli_fetch_array($check);
+
 
 
     if(isset($_POST['postJob'])){
@@ -26,9 +38,9 @@ if($_SESSION["U-Email"] == null){
             $Post = $p;
         }
 
-        $q = "INSERT INTO joblist (`Location`, `Days`, `Hours`, `Position`, `Pay`, `Description`, `MasterLicenseNo`, `Status`)
-         VALUES ('$Loc','$Days','$Hours','$Post','$Pay','$Desc','$mlNum','$Status')";
-        $check = mysqli_query($conn,$q);
+        $q = "INSERT INTO joblist (`Location`, `Days`, `Hours`, `Position`, `Pay`, `Description`, `MasterLicenseNo`, `Status`, `Uid`)
+         VALUES ('$Loc','$Days','$Hours','$Post','$Pay','$Desc','$mlNum','$Status','$uid')";
+        $check = mysqli_query($link,$q);
 
         $counter = 0;
 

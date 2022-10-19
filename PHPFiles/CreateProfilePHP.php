@@ -86,7 +86,8 @@ if(mysqli_num_rows($check)){
         // Execute query
         mysqli_query($link, $sql); 
         // Now move the uploaded image into the folder: image
-        if (move_uploaded_file($DLtempname, $folder)) {       
+        if (move_uploaded_file($DLtempname, $folder)) { 
+            $_SESSION['messagePC']  = "Profile Created Successfully! Welcome to JOB PORTAL Dashboard.";
             header('Location: Dashboard.php');
         }
         else {

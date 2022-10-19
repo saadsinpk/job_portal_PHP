@@ -3,6 +3,7 @@ include 'PHPFiles/RegisterPHP.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 	<title>JOB PORTAL | REGISTER</title>
@@ -29,47 +30,35 @@ include 'PHPFiles/RegisterPHP.php';
 			</div>
 		</div>
 		<div class="auth-side-form">
-            <form method="post">
-			<div class=" auth-content">
-				<img src="resources\template\assets\AuthAssets\images/auth/auth-logo-dark.png" alt="" class="img-fluid mb-4 d-block d-xl-none d-lg-none">
-				<h4 class="mb-3 f-w-400">Sign up</h4>
-				<div class="form-group mb-3">
-					<label class="floating-label" for="Email">Email address</label>
-					<input type="text" class="form-control" name="u-email" id="u-email" required placeholder="">
+			<form method="post">
+				<div class=" auth-content">
+					<img src="resources\template\assets\AuthAssets\images/auth/auth-logo-dark.png" alt="" class="img-fluid mb-4 d-block d-xl-none d-lg-none">
+					<h4 class="mb-3 f-w-400">Sign up</h4>
+					<div class="form-group mb-3">
+						<label class="floating-label" for="Email">Email address</label>
+						<input type="email" class="form-control" name="u-email" id="u-email" required placeholder="">
+					</div>
+					<div class="form-group mb-4">
+						<label class="floating-label" for="Password">Password</label>
+						<input type="password" class="form-control"  name="u-password" id="u-password" placeholder="" required>
+					</div>
+					<button type="submit" name="reg" class="btn btn-primary btn-block mb-4">Sign up</button>
+					<?php
+					if (isset($_SESSION['message'])) {
+					?>
+						<p class="text-danger text-center">
+							<?php echo $_SESSION['message']; ?>
+						</p>
+					<?php unset($_SESSION['message']); 	} ?>
+					<div class="text-center">
+						<div class="saprator my-4"><span>OR</span></div>
+						<p class="mt-4">Already have an account? <a href="Login.php" class="f-w-400">Signin</a></p>
+					</div>
 				</div>
-				<div class="form-group mb-4">
-					<label class="floating-label" for="Password">Password</label>
-					<input type="password" class="form-control" name="u-password" id="u-password" placeholder="" required>
-				</div>
-				<button type="submit" name="reg" class="btn btn-primary btn-block mb-4">Sign up</button>
-				<div class="text-center">
-					<div class="saprator my-4"><span>OR</span></div>
-					<p class="mt-4">Already have an account? <a href="Login.php" class="f-w-400">Signin</a></p>
-				</div>
-			</div>
-            </form>
+			</form>
 		</div>
 	</div>
 </div>
-
-
-
-    <form method="post">
-
-        <input type="email" name="u-email" id="u-email" placeholder="Email" required><br><br>
-        <input type="password" name="u-password" id="u-password" placeholder="Password" required><br><br>
-        <input type="password" name="u-cpassword" id="u-cpassword" placeholder="Confirm Password" required><br><br>
-        <span id="err"></span>
-        <input type="submit" name="reg" value="Register">
-
-    </form>
-
-
-    <script type="text/javascript">
-        var d = new Date();
-        var elem = document.getElementById("reg_date"); 
-        elem.value = d.toISOString().slice(0,16);
-      </script>
 
 
 
