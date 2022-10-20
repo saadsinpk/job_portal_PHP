@@ -82,10 +82,8 @@ if ($uid == $data) {
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="pp" name="pp" value="<?php echo $row['ProfileImage']; ?>">
+                                                    <input type="hidden" value="<?= $row['ProfileImage']; ?>" id="oldpp" name="oldpp">
                                                     <label class="custom-file-label"><?php echo $row['ProfileImage']; ?></label>
-                                                </div>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">Upload</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -101,10 +99,8 @@ if ($uid == $data) {
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="dl" name="dl" value="<?php echo $row['DriversLicense']; ?>">
+                                                    <input type="hidden" value="<?= $row['DriversLicense']; ?>" id="olddl" name="olddl">
                                                     <label class="custom-file-label"><?php echo $row['DriversLicense']; ?></label>
-                                                </div>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">Upload</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -122,10 +118,8 @@ if ($uid == $data) {
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="sl" name="sl" value="<?php echo $row['SecurityLicense']; ?>">
+                                                    <input type="hidden" value="<?= $row['SecurityLicense']; ?>" id="oldsl" name="oldsl">
                                                     <label class="custom-file-label"><?php echo $row['SecurityLicense']; ?></label>
-                                                </div>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">Upload</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -143,10 +137,8 @@ if ($uid == $data) {
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" value="<?php echo $row['CovidVacc']; ?>" id="cv" name="cv">
+                                                    <input type="hidden" value="<?= $row['CovidVacc']; ?>" id="oldcv" name="oldcv">
                                                     <label class="custom-file-label"><?php echo $row['CovidVacc']; ?></label>
-                                                </div>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">Upload</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -165,10 +157,8 @@ if ($uid == $data) {
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="fa" name="fa" value="<?php echo $row['FirstAid']; ?>">
+                                                    <input type="hidden" value="<?= $row['FirstAid']; ?>" id="oldfa" name="oldfa">
                                                     <label class="custom-file-label"><?php echo $row['FirstAid']; ?></label>
-                                                </div>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">Upload</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -185,10 +175,8 @@ if ($uid == $data) {
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="rsa" name="rsa" value="<?php echo $row['RSALicense']; ?>">
+                                                    <input type="hidden" value="<?= $row['RSALicense']; ?>" id="oldrsa" name="oldrsa">
                                                     <label class="custom-file-label"><?php echo $row['RSALicense']; ?></label>
-                                                </div>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">Upload</span>
                                                 </div>
                                             </div>
                                         </div>
