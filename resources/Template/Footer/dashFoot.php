@@ -58,40 +58,54 @@
 </script>
 
 <script>
-$(function () {
-  bsCustomFileInput.init();
-});
+  $(function() {
+    bsCustomFileInput.init();
+  });
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
 
 <script>
-    $(document).ready(function() {
-        $('#postJob').click(function() {
-            var selected = $("#days :selected").map((_, e) => e.value).get();
-            $("#selecteddays").val(selected);
-        });
+  $(document).ready(function() {
+    $('#postJob').click(function() {
+      var selected = $("#days :selected").map((_, e) => e.value).get();
+      $("#selecteddays").val(selected);
     });
+  });
 
-    $('select').selectpicker();
-
-
-    function yesnoCheck(that) {
-        if (that.value == "Other ( Name )") {
-            document.getElementById("positions").style.display = "block";
-            document.getElementById("positions").setAttribute('required', '');
+  $('select').selectpicker();
 
 
-            var data = document.getElementById("positions").value;
-            document.getElementById("position").innerHtml = data;
+  function yesnoCheck(that) {
+    if (that.value == "Other ( Name )") {
+      document.getElementById("positions").style.display = "block";
+      document.getElementById("positions").setAttribute('required', '');
 
 
-        } else {
-            document.getElementById("positions").style.display = "none";
-        }
+      var data = document.getElementById("positions").value;
+      document.getElementById("position").innerHtml = data;
+
+
+    } else {
+      document.getElementById("positions").style.display = "none";
     }
+  }
 </script>
 
+
+<script>
+  // $("#MyButton").click(function() {
+  //   $("#refreshDivID").load("#refreshDivID .reloaded-divs > *");
+  //   $("#chatBox").ready(function() {
+  //     var div = document.getElementById('chatBox');
+  //     div.scrollTop = div.scrollHeight - div.clientHeight;
+  //   })
+  // });
+  $("#chatBox").ready(function() {
+    var div = document.getElementById('chatBox');
+    div.scrollTop = div.scrollHeight - div.clientHeight;
+  });
+</script>
 
 </body>
 

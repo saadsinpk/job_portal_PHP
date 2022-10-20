@@ -1,7 +1,7 @@
 <?php
 session_start();
 include './resources/template/head/dashHead.php';
-include './PHPFiles/ManageProfilePHP.php';
+include 'PHPFiles/ManageProfilePHP.php';
 
 if ($_SESSION["U-Email"] == null) {
     header('Location: Login.php');
@@ -203,7 +203,7 @@ if ($uid == $data) {
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" name="update" id="update" class="btn btn-primary">UPDATE</button>
+                                <button type="submit" name="updateProf" id="updateProf" class="btn btn-primary">UPDATE</button>
                             </div>
                         </form>
                     </div>

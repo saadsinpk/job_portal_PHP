@@ -91,12 +91,7 @@ include './resources/template/head/dashHead.php';
 
                             <div class="card-footer">
                                 <button type="submit" id="postJob" name="postJob" class="btn btn-primary">POST JOB</button>
-                            </div>
-
-
-
-
-                            
+                            </div>                           
 
                         </form>
                     </div>

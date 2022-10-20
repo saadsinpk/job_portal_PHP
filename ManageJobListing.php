@@ -3,6 +3,7 @@ session_start();
 
 include './resources/DBconnection/config.php';
 include './resources/template/head/dashHead.php';
+include './PHPFiles/DeleteJobPHP.php';
 
 if ($_SESSION["U-Email"] == null) {
     header('Location: Login.php');
@@ -42,21 +43,9 @@ $result = mysqli_query($link, $q);
                     ?>
                         <div class="alert alert-success alert-dismissible" id="myElem">
                             <h5><i class="icon fas fa-check"></i> Success!</h5>
-                            <?php echo $_SESSION['message'] ?>
+                            <p class="text-center"><?php echo $_SESSION['msg'] ?></p>
                         </div>
                     <?php unset($_SESSION['message']);
-                    } ?>
-                </div>
-                <div class="col-sm-12 text-center">
-                    <?php
-                    if (isset($_SESSION['messagePC'])) {
-                    ?>
-                        <div class="alert alert-success alert-dismissible" id="myElem">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <h5><i class="icon fas fa-check"></i> Success!</h5>
-                            <?php echo $_SESSION['messagePC'] ?>
-                        </div>
-                    <?php unset($_SESSION['messagePC']);
                     } ?>
                 </div>
                 <div class="col-sm-6">
@@ -85,7 +74,7 @@ $result = mysqli_query($link, $q);
                                         <div class="alert alert-success alert-dismissible" id="myElem">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                             <h5><i class="icon fas fa-check"></i> Success!</h5>
-                                            <?php echo $_SESSION['msg'] ?>
+                                            <p class="text-center"><?php echo $_SESSION['msg'] ?></p>
                                         </div>
                                     <?php unset($_SESSION['msg']);
                                     } ?>
@@ -143,11 +132,12 @@ $result = mysqli_query($link, $q);
                                                         <?php echo $row["Status"]; ?>
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-block bg-gradient-success" href="updateJob.php?id=<?php echo $row['JobId'] ?>">Update</a>
+                                                        <a name="getUser" class="btn btn-block bg-gradient-success" href="updateJob.php?id=<?php echo $row['JobId'] ?>">Update</a>
                                                     </td>
                                                     <td>
                                                         <form method="get">
-                                                            <a class="btn btn-block bg-gradient-danger"  href="ManageJobListing.php?id=<?php echo $row['JobId'] ?>" name="cancelListing">Cancel Listing</a>
+                                                        <input type="text" name="Jobid" value="<?php echo $row['JobId'] ?>" hidden>
+                                                            <a class="btn btn-block bg-gradient-danger" href="ManageJobListing.php?id=<?php echo $row['JobId'] ?>" name="cancelListing" onclick="return  confirm('do you want to delete Y/N')">Cancel Listing</a>
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -176,89 +166,6 @@ $result = mysqli_query($link, $q);
         </section>
     </div>
 </div>
-
-<?php
-if (mysqli_num_rows($result) > 0) {
-?>
-    <table class="table-bordered">
-
-        <tr>
-            <td>Location</td>
-            <td>Days</td>
-            <td>Hours</td>
-            <td>Positions</td>
-            <td>Pay</td>
-            <td>Description</td>
-            <td>MasterLicenseNo</td>
-            <td>Status</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <?php
-        $i = 0;
-        while ($row = mysqli_fetch_array($result)) {
-        ?>
-            <tr>
-                <td>
-                    <?php echo $row["Location"]; ?>
-                </td>
-                <td>
-                    <?php echo $row["Days"]; ?>
-                </td>
-                <td>
-                    <?php echo $row["Hours"]; ?>
-                </td>
-                <td>
-                    <?php echo $row["Position"]; ?>
-                </td>
-                <td>
-                    <?php echo $row["Pay"]; ?>
-                </td>
-                <td>
-                    <?php echo $row["Description"]; ?>
-                </td>
-                <td>
-                    <?php echo $row["MasterLicenseNo"]; ?>
-                </td>
-                <td>
-                    <?php echo $row["Status"]; ?>
-                </td>
-                <td>
-                    <a href="updateJob.php?id=<?php echo $row['JobId'] ?>">Update</a>
-                </td>
-                <td>
-                    <form method="get">
-                        <a href="ManageJobListing.php?id=<?php echo $row['JobId'] ?>" name="cancelListing">Cancel Listing</a>
-                    </form>
-                </td>
-            </tr>
-        <?php
-            $i++;
-        }
-        ?>
-    </table>
-<?php
-} else {
-    echo "No result found";
-}
-?>
-
-
-<?php
-
-if (isset($_GET['id'])) {
-
-    $id = $_GET['id'];
-
-    $q = "Delete from joblist where JobId ='$id'";
-    $check = mysqli_query($link, $q);
-}
-
-?>
-
-
-
-
 
 <?php
 

@@ -1,147 +1,143 @@
 <?php
-include_once 'resources/DBconnection/config.php';
+include './PHPFiles/UpdateJobPHP.php';
+include './resources/template/head/dashHead.php';
+
+
 ?>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Advertise Job</h1>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Job Details</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form method="post">
 
-<!DOCTYPE html>
-<html lang="en">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Location</label>
+                                    <input type="text" class="form-control" name="location" id="location" placeholder="Location" value="<?php echo $row["Location"]; ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Select Days: </label>
+                                    <select class="selectpicker" data-mdb-placeholder="Select Days" name="days" id="days" multiple data-live-search="true" required>
+                                        <option selected="<?php echo $row["Days"]; ?>"><?php echo $row["Days"]; ?></option>
+                                        <option value="Mon">Monday</option>
+                                        <option value="Tue">Tuesday</option>
+                                        <option value="Wed">Wednesday</option>
+                                        <option value="Thurs">Thursday</option>
+                                        <option value="Fri">Friday</option>
+                                        <option value="Sat">Saturday</option>
+                                        <option value="Sun">Sunday</option>
+                                    </select>
+                                    <input type="text" name="selecteddays" id="selecteddays" hidden>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Select Hours</label>
+                                    <input type="text" class="form-control" name="hours" id="hours" placeholder="Hours" value="<?php echo $row["Hours"]; ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Job Position</label>
+                                    <select onchange="yesnoCheck(this);" class="selectpicker" data-mdb-placeholder="Select Days" name="position" id="position" data-live-search="true" required>
+                                        <option selected="<?php echo $row["Position"]; ?>"><?php echo $row["Position"]; ?></option>
+                                        <option value="Age Care Facilities">Age Care Facilities</option>
+                                        <option value="RSA Work">RSA Work</option>
+                                        <option value="GateHouse">GateHouse</option>
+                                        <option value="Retail Rover">Retail Rover</option>
+                                        <option value="Retail Shopping Centre">Retail Shopping Centre</option>
+                                        <option value="General Static">General Static</option>
+                                        <option value="Other ( Name )">Other ( Name )</option>
+                                    </select>
+                                    <input type="text" class="form-control" value="<?php echo $row["Position"]; ?>" name="positions" id="positions" placeholder="Other Position" style="display:none;">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Pay</label>
+                                    <input type="text" class="form-control" value="<?php echo $row["Pay"]; ?>" name="pay" id="pay" placeholder="PAY" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Description</label>
+                                    <input type="text" name="desc" id="desc" value="<?php echo $row["Description"]; ?>" placeholder="Description" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Master License No</label>
+                                    <input type="text" name="MLnum" value="<?php echo $row["MasterLicenseNo"]; ?>" id="MLnum" placeholder="Master License No" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Status</label>
+                                    <option selected="<?php echo $row["Status"]; ?>"><?php echo $row["Status"]; ?></option>
+                                    <select class="selectpicker" data-mdb-placeholder="Select Job Status" name="status" id="status" required>
+                                        <option value="Available">Available</option>
+                                        <option value="No Vacancies">No Vacancies</option>
+                                    </select>
+                                </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-</head>
+                            </div>
+                            <!-- /.card-body -->
 
-<body>
+                            <div class="card-footer">
+                                <button type="submit" id="updateJob" name="updateJob" class="btn btn-success">UPDATE JOB</button>
+                            </div>
 
 
 
 
-    <?php
 
 
-    if (isset($_GET['id'])) {
-        $jobId = $_GET['id'];
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 
-        $qu = "Select * from joblist where JobId = '" . $jobId . "' ";
-        $result = mysqli_query($link, $qu);
-        $row = mysqli_fetch_array($result);
-    }
-
-    ?>
-    <form method="post">
-
-        <input type="text" name="location" id="location" placeholder="Location" value="<?php echo $row["Location"]; ?>" required><br><br>
-
-        <select class="selectpicker" data-mdb-placeholder="Select Days" name="days" id="days" multiple data-live-search="true" required>
-            <option selected="<?php echo $row["Days"]; ?>"><?php echo $row["Days"]; ?></option>
-            <option value="Mon">Monday</option>
-            <option value="Tue">Tuesday</option>
-            <option value="Wed">Wednesday</option>
-            <option value="Thurs">Thursday</option>
-            <option value="Fri">Friday</option>
-            <option value="Sat">Saturday</option>
-            <option value="Sun">Sunday</option>
-        </select><br><br>
-        <input type="text" name="selecteddays" id="selecteddays" hidden>
-        <br><br>
-
-        <input type="text" name="hours" id="hours" placeholder="Hours" value="<?php echo $row["Hours"]; ?>" required><br><br>
-
-
-        <select onchange="yesnoCheck(this);" class="selectpicker" data-mdb-placeholder="Select Positions" name="position" id="position" data-live-search="true" required>
-
-            <option selected="<?php echo $row["Position"]; ?>"><?php echo $row["Position"]; ?></option>
-
-            <option value="Age Care Facilities">Age Care Facilities</option>
-            <option value="RSA Work">RSA Work</option>
-            <option value="GateHouse">GateHouse</option>
-            <option value="Retail Rover">Retail Rover</option>
-            <option value="Retail Shopping Centre">Retail Shopping Centre</option>
-            <option value="General Static">General Static</option>
-            <option value="Other ( Name )">Other ( Name )</option>
-        </select><br><br>
-        <input type="text" name="positions" value="<?php echo $row["Position"]; ?>" id="positions" placeholder="Positions" style="display:none;" required><br><br>
-
-
-        <input type="text" name="pay" id="pay" placeholder="PAY" value="<?php echo $row["Pay"]; ?>" required><br><br>
-        <input type="text" name="desc" id="desc" placeholder="Description" value="<?php echo $row["Description"]; ?>" required><br><br>
-        <input type="text" value="<?php echo $row["MasterLicenseNo"]; ?>" name="MLnum" id="MLnum" placeholder="Master License No" required><br><br>
-
-        <select class="selectpicker" data-mdb-placeholder="Select Job Status" name="status" id="status" required>
-            <option selected="<?php echo $row["Status"]; ?>"><?php echo $row["Status"]; ?></option>
-            <option value="Available">Available</option>
-            <option value="No Vacancies">No Vacancies</option>
-        </select><br><br>
-
-        <input type="submit" id="updateJob" name="updateJob" value="Post Job">
-
-    </form>
-
-    <script>
-        $(document).ready(function() {
-            $('#updateJob').click(function() {
-                var selected = $("#days :selected").map((_, e) => e.value).get();
-                $("#selecteddays").val(selected);
-            });
+<script>
+    $(document).ready(function() {
+        $('#updateJob').click(function() {
+            var selected = $("#days :selected").map((_, e) => e.value).get();
+            $("#selecteddays").val(selected);
         });
+    });
 
-        $('select').selectpicker();
-
-
-        function yesnoCheck(that) {
-            if (that.value == "Other ( Name )") {
-                document.getElementById("positions").style.display = "block";
+    $('select').selectpicker();
 
 
-                var data = document.getElementById("positions").value;
-                document.getElementById("position").innerHtml = data;
+    function yesnoCheck(that) {
+        if (that.value == "Other ( Name )") {
+            document.getElementById("positions").style.display = "block";
 
 
-            } else {
-                document.getElementById("positions").style.display = "none";
-            }
-        }
-    </script>
-
-    <?php
-
-    if (isset($_POST['updateJob'])) {
-
-        $Loc = $_POST['location'];
-        $Days = $_POST['selecteddays'];
-        $Hours = $_POST['hours'];
-        $Post = $_POST['position'];
-        $Pay = $_POST['pay'];
-        $Desc = $_POST['desc'];
-        $mlNum = $_POST['MLnum'];
-        $Status = $_POST['status'];
-
-        if ($Post == "Other ( Name )") {
-            $p = $_POST['positions'];
-            $Post = $p;
-        }
+            var data = document.getElementById("positions").value;
+            document.getElementById("position").innerHtml = data;
 
 
-        $q = "UPDATE joblist SET `Location`='$Loc',`Days`='$Days',`Hours`='$Hours',`Position`='$Post',`Pay`='$Pay',`Description`='$Desc',`MasterLicenseNo`='$mlNum',`Status`='$Status' WHERE JobId='$jobId'";
-        $check = mysqli_query($link, $q);
-
-        if ($check) {
-            echo "<script>alert('Job Updated Successfully.')</script>";
-            echo "<script>window.location.href = 'ManageJobListing.php'</script>";
         } else {
-            echo "<script>alert('Job Update Failed. Please Try Again.')</script>";
+            document.getElementById("positions").style.display = "none";
         }
     }
+</script>
 
 
-    ?>
+<?php
 
-</body>
-
-</html>
+include './resources/template/footer/dashFoot.php';
+?>

@@ -1,22 +1,22 @@
 <?php
 
-$link = mysqli_connect("localhost","root","","job_portal");
+$link = mysqli_connect("localhost", "root", "", "job_portal");
 
 if ($_SESSION["U-Email"] == null) {
   header('Location: Login.php');
 }
 
 
-$q =  "Select * from users Where uemail = '".$_SESSION["U-Email"]."'";
-$ch = mysqli_query($link,$q);
+$q =  "Select * from users Where uemail = '" . $_SESSION["U-Email"] . "'";
+$ch = mysqli_query($link, $q);
 $res = mysqli_fetch_array($ch);
 
 
 $uid = $res['Uid'];
 
 $q2 =  "Select * from userinfo Where Uid = '$uid'";
-$check = mysqli_query($link,$q2);
-$result= mysqli_fetch_array($check);
+$check = mysqli_query($link, $q2);
+$result = mysqli_fetch_array($check);
 
 
 ?>
@@ -107,7 +107,7 @@ $result= mysqli_fetch_array($check);
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-            <li class="nav-item menu-open">
+            <li class="nav-item menu-open mb-2">
               <a href="Dashboard.php" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
@@ -115,16 +115,24 @@ $result= mysqli_fetch_array($check);
                 </p>
               </a>
             </li>
-            <li class="nav-item menu-open">
+            <li class="nav-item menu-open mb-2">
+              <a href="ManageJobListing.php" class="nav-link">
+                <i class="nav-icon fas fa-tasks"></i>
+                <p>
+                  Manage Job Listing
+                </p>
+              </a>
+            </li>
+            <li class="nav-item menu-open mb-2">
               <a href="AppliedJobs.php" class="nav-link">
                 <i class="nav-icon fas fa-edit"></i>
-                
+
                 <p>
                   Applied Jobs
                 </p>
               </a>
             </li>
-            <li class="nav-item menu-open">
+            <li class="nav-item menu-open mb-2">
               <a href="PostJob.php" class="nav-link">
                 <i class="nav-icon fas fa-ad"></i>
                 <p>
@@ -132,11 +140,11 @@ $result= mysqli_fetch_array($check);
                 </p>
               </a>
             </li>
-            <li class="nav-item menu-open">
-              <a href="#" class="nav-link">
+            <li class="nav-item menu-open mb-2">
+              <a href="AppliedUsers.php" class="nav-link">
                 <i class="nav-icon fas fa-envelope"></i>
                 <p>
-                  Chat
+                  Inbox
                 </p>
               </a>
             </li>

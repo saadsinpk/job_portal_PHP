@@ -27,7 +27,7 @@ if(isset($_POST['update'])){
 
     if($check){
 
-        $qu = "UPDATE `users` SET `uemail`='".$_SESSION["U-Email"]."',`upassword`='$new' WHERE Uid = '$uid'";
+        $qu = "UPDATE `users` SET `uemail`='".$_SESSION["U-Email"]."',`upassword`='".md5($new)."' WHERE Uid = '$uid'";
         $res = mysqli_query($link,$qu);
         $_SESSION['updatePass'] = "Password Updated Successfully.";
         echo "<script>window.location.href = 'Settings.php';</script>";

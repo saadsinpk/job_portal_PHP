@@ -1,0 +1,168 @@
+<?php
+session_start();
+include './resources/template/head/dashHead.php';
+include 'PHPFiles/MessengerPHP.php';
+
+$userData = "SELECT * FROM userinfo WHERE `Uid` = '$user'";
+$userQuery = mysqli_query($link, $userData);
+$userInfo = mysqli_fetch_array($userQuery);
+
+?>
+
+<div class="content-wrapper" style="min-height: 432px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Messenger</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="AppliedUsers.php">Inbox</a></li>
+                        <li class="breadcrumb-item active"><?php echo $userInfo['FirstName'] . " " . $userInfo['LastName']; ?></li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-12 connectedSortable ui-sortable">
+                    <!-- DIRECT CHAT -->
+                    <div class="card direct-chat direct-chat-primary">
+                        <div class="card-header ui-sortable-handle" style="cursor: move;">
+                            <h3 class="card-title"><?php echo $userInfo['FirstName'] . " " . $userInfo['LastName']; ?></h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button id="MyButton" class="btn btn-tool" title="Refresh" onClick="window.location.reload(true)">
+                                    <i class="fas fa-comments"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div id="refreshDivID">
+                                <div class="reloaded-divs">
+                                    <!-- Conversations are loaded here -->
+                                    <div id="chatBox" class="direct-chat-messages">
+
+                                        <?php
+                                        $i = 0;
+
+                                        $query = "SELECT * FROM chat";
+                                        $run = mysqli_query($link, $query);
+
+
+
+                                        while ($data = mysqli_fetch_array($run)) {
+                                        ?>
+                                            <?php if ($data['reciever_userid'] == $uid) { ?>
+
+
+                                                <?php
+                                                if (mysqli_num_rows($run) > 0) {
+                                                ?>
+                                                    <!-- Message. Default to the left -->
+                                                    <div class="direct-chat-msg">
+                                                        <div class="direct-chat-infos clearfix">
+                                                            <span class="direct-chat-name float-left">
+                                                                <?php echo $userInfo['LastName']; ?>
+                                                            </span>
+                                                            <span class="direct-chat-timestamp float-right">
+                                                                <?php echo $data['timestamp']; ?>
+                                                            </span>
+                                                        </div>
+                                                        <!-- /.direct-chat-infos -->
+                                                        <img class="direct-chat-img" src="./resources/assets/dist/img/user1-128x128.jpg" alt="message user image">
+                                                        <!-- /.direct-chat-img -->
+                                                        <div class="direct-chat-text">
+                                                            <?php echo $data['message']; ?>
+                                                        </div>
+                                                        <!-- /.direct-chat-text -->
+                                                    </div>
+                                                    <!-- /.direct-chat-msg -->
+                                                <?php
+                                                } else {
+                                                    echo "No result found";
+                                                }
+                                                ?>
+                                            <?php }
+                                            if ($data['sender_userid'] == $uid) { ?>
+
+
+                                                <!-- Message to the right -->
+                                                <div class="direct-chat-msg right">
+                                                    <div class="direct-chat-infos clearfix">
+                                                        <span class="direct-chat-name float-right">You</span>
+                                                        <span class="direct-chat-timestamp float-left">
+                                                            <?php echo $data['timestamp']; ?>
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.direct-chat-infos -->
+                                                    <img class="direct-chat-img" src="./resources/assets/dist/img/user3-128x128.jpg" alt="message user image">
+                                                    <!-- /.direct-chat-img -->
+                                                    <div class="direct-chat-text">
+                                                        <?php echo $data['message']; ?>
+                                                    </div>
+                                                    <!-- /.direct-chat-text -->
+                                                </div>
+                                                <!-- /.direct-chat-msg -->
+
+                                            <?php } ?>
+                                        <?php
+                                            $i++;
+                                        }
+                                        ?>
+
+                                    </div>
+                                    <!--/.direct-chat-messages-->
+
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <form method="post">
+                                <div class="input-group">
+                                    <input type="text" name="message" id="message" placeholder="Type Message ..." class="form-control">
+                                    <span class="input-group-append">
+                                        <button type="submit" id="sendmsg" name="sendmsg" class="btn btn-primary">Send</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                    <!--/.direct-chat -->
+                    <!-- /.card -->
+                </section>
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+<?php
+
+include './resources/template/footer/dashFoot.php';
+?>
