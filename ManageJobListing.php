@@ -136,6 +136,7 @@ $result = mysqli_query($link, $q);
                                                         <?php echo $row["Timestamp"]; ?>
                                                     </td>
                                                     <td>
+                                                    <a name="viewUser" class="btn btn-block bg-gradient-success mb-2" href="viewJob.php?id=<?php echo $row['JobId'] ?>">View Apply Users</a>
                                                     <a name="getUser" class="btn btn-block bg-gradient-success mb-2" href="updateJob.php?id=<?php echo $row['JobId'] ?>">Update</a>
 
                                                         <form method="get">
