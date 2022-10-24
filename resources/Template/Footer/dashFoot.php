@@ -94,18 +94,24 @@
 
 
 <script>
-  // $("#MyButton").click(function() {
-  //   $("#refreshDivID").load("#refreshDivID .reloaded-divs > *");
-  //   $("#chatBox").ready(function() {
-  //     var div = document.getElementById('chatBox');
-  //     div.scrollTop = div.scrollHeight - div.clientHeight;
-  //   })
-  // });
   $("#chatBox").ready(function() {
     var div = document.getElementById('chatBox');
     div.scrollTop = div.scrollHeight - div.clientHeight;
   });
 </script>
+
+<!-- 
+<script>
+
+    var inputData = document.getElementById("fname").value;
+    
+    $('input').on('input',function(e){
+        $("#updateProf").css("display", "inline");
+    });
+</script> -->
+
+
+
 
 </body>
 

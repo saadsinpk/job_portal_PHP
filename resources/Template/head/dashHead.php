@@ -1,9 +1,9 @@
 <?php
 
-$link = mysqli_connect("localhost", "root", "", "job_portal");
+$link = mysqli_connect("108.167.133.11", "hiresecu_db", "-mJ.cG@)3fb1", "hiresecu_job_portal");
 
 if ($_SESSION["U-Email"] == null) {
-  header('Location: Login.php');
+  echo "<script>window.location = 'Login.php';</script>";
 }
 
 
@@ -74,7 +74,7 @@ $result = mysqli_fetch_array($check);
               <i class="fas fa-cog mr-2"></i> Settings
             </a>
             <a href="Signout.php" class="dropdown-item">
-              <i class="fas fa-sign-out-alt mr-2"></i> Singout
+              <i class="fas fa-sign-out-alt mr-2"></i> Sign Out
             </a>
           </div>
         </li>
@@ -85,7 +85,7 @@ $result = mysqli_fetch_array($check);
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
+      <a href="#" class="brand-link">
         <img src="resources\assets\dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">JOB PORTAL</span>
       </a>
@@ -144,7 +144,7 @@ $result = mysqli_fetch_array($check);
               <a href="AppliedUsers.php" class="nav-link">
                 <i class="nav-icon fas fa-envelope"></i>
                 <p>
-                  Inbox
+                  User Applications (Inbox)
                 </p>
               </a>
             </li>

@@ -1,13 +1,12 @@
+<?php 
+if(!isset($_SESSION)) { session_start(); }
 
-
-    <?php 
-
-session_start();
+ob_start();
 
 include './resources/DBconnection/config.php';
 
 if($_SESSION["U-Email"] == null){
-    header('Location: Login.php');
+    echo "<script>window.location = 'Login.php';</script>";
 }
 
 
@@ -32,7 +31,7 @@ if(mysqli_num_rows($check)){
         
 
         if($data == $uid){
-            header('Location: Dashboard.php');
+            echo "<script>window.location = 'Dashboard.php';</script>";
             exit();
         }
 }
@@ -88,38 +87,38 @@ if(mysqli_num_rows($check)){
         // Now move the uploaded image into the folder: image
         if (move_uploaded_file($DLtempname, $folder)) { 
             $_SESSION['messagePC']  = "Profile Created Successfully! Welcome to JOB PORTAL Dashboard.";
-            header('Location: Dashboard.php');
+            echo "<script>window.location = 'Dashboard.php';</script>";
         }
         else {
             echo "<h3>  Failed Creating Profile.!</h3>";
         }
         
         if(move_uploaded_file($SLtempname, $folder1)) {
-            header('Location: Dashboard.php');
+            echo "<script>window.location = 'Dashboard.php';</script>";
         }else {
             echo "<h3>  Failed Creating Profile.!</h3>";
         }
 
         if(move_uploaded_file($CVtempname, $folder2)) {
-            header('Location: Dashboard.php');
+            echo "<script>window.location = 'Dashboard.php';</script>";
         }else {
             echo "<h3>  Failed Creating Profile.!</h3>";
         }
         
         if(move_uploaded_file($FAtempname, $folder3)) {
-            header('Location: Dashboard.php');
+            echo "<script>window.location = 'Dashboard.php';</script>";
         }else {
             echo "<h3>  Failed Creating Profile.!</h3>";
         } 
         
         if(move_uploaded_file($RSAtempname, $folder4)) {
-            header('Location: Dashboard.php');
+            echo "<script>window.location = 'Dashboard.php';</script>";
         }else {
             echo "<h3>  Failed Creating Profile.!</h3>";
         }
         
         if(move_uploaded_file($Proftempname, $folder5)) {
-            header('Location: Dashboard.php');
+            echo "<script>window.location = 'Dashboard.php';</script>";
         }else {
             echo "<h3>  Failed Creating Profile.!</h3>";
         }

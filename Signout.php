@@ -1,10 +1,11 @@
 <?php 
-session_start();
+if(!isset($_SESSION)) { session_start(); }
+ob_start();
 session_destroy();
-header('Location: Login.php');
+echo "<script>window.location = 'Login.php';</script>";
 
 if(!isset($_SESSION["U-Email"])){
-    header('Location: Login.php');
+    echo "<script>window.location = 'Login.php';</script>";
 }
 echo $_SESSION["U-Email"];
 

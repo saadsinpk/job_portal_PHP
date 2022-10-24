@@ -1,5 +1,6 @@
 <?php
-session_start();
+if(!isset($_SESSION)) { session_start(); }
+ob_start();
 include './resources/template/head/dashHead.php';
 include 'PHPFiles/MessengerPHP.php';
 
@@ -65,6 +66,10 @@ $userInfo = mysqli_fetch_array($userQuery);
                                         $query = "SELECT * FROM chat";
                                         $run = mysqli_query($link, $query);
 
+                                        $senderInfo = "SELECT * FROM userinfo WHERE `Uid` = '$uid'";
+                                        $getData = mysqli_query($link,$senderInfo);
+                                        $senderData = mysqli_fetch_array($getData);
+
 
 
                                         while ($data = mysqli_fetch_array($run)) {
@@ -86,7 +91,7 @@ $userInfo = mysqli_fetch_array($userQuery);
                                                             </span>
                                                         </div>
                                                         <!-- /.direct-chat-infos -->
-                                                        <img class="direct-chat-img" src="./resources/assets/dist/img/user1-128x128.jpg" alt="message user image">
+                                                        <img class="direct-chat-img" src="images/ProfilePicture/<?php echo $userInfo['ProfileImage']; ?>" alt="message user image">
                                                         <!-- /.direct-chat-img -->
                                                         <div class="direct-chat-text">
                                                             <?php echo $data['message']; ?>
@@ -112,7 +117,7 @@ $userInfo = mysqli_fetch_array($userQuery);
                                                         </span>
                                                     </div>
                                                     <!-- /.direct-chat-infos -->
-                                                    <img class="direct-chat-img" src="./resources/assets/dist/img/user3-128x128.jpg" alt="message user image">
+                                                    <img class="direct-chat-img" src="images/ProfilePicture/<?php echo $senderData['ProfileImage']; ?>" alt="message user image">
                                                     <!-- /.direct-chat-img -->
                                                     <div class="direct-chat-text">
                                                         <?php echo $data['message']; ?>

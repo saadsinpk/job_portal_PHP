@@ -1,10 +1,11 @@
 <?php
-session_start();
+if(!isset($_SESSION)) { session_start(); }
+ob_start();
 include './resources/template/head/dashHead.php';
 include 'PHPFiles/ManageProfilePHP.php';
 
 if ($_SESSION["U-Email"] == null) {
-    header('Location: Login.php');
+    echo "<script>window.location = 'Login.php';</script>";
 }
 
 
@@ -22,15 +23,16 @@ $result = mysqli_fetch_array($check);
 $data = $result['Uid'];
 
 if ($uid != $data) {
-    header('Location: CreateProfile.php');
+    echo "<script>window.location = 'CreateProfile.php';</script>";
 }
 
 
 if ($uid == $data) {
 
-    $qu = "SELECT `FirstName`, `LastName`, `ContactNo`, `DriversLicense`, `SecurityLicense`, `CovidVacc`, `FirstAid`, `RSALicense`, `ProfileImage`, `Uid` FROM `userinfo` WHERE $uid";
+    $qu = "SELECT * FROM `userinfo` WHERE `Uid`= $uid";
     $result = mysqli_query($link, $qu);
     $row = mysqli_fetch_array($result);
+    
 }
 
 ?>
@@ -65,17 +67,20 @@ if ($uid == $data) {
                                 <div class="form-group">
                                     <label>First Name</label>
                                     <input type="text" class="form-control" id="fname" name="fname" value="<?php echo $row['FirstName']; ?>">
+                                    <input type="hidden" value="<?= $row['FirstName']; ?>" id="oldName" name="oldName">
                                 </div>
                                 <div class="form-group">
                                     <label>Last Name</label>
                                     <input type="text" class="form-control" id="lname" name="lname" value="<?php echo $row['LastName']; ?>">
+                                    <input type="hidden" value="<?= $row['LastName']; ?>" id="oldLName" name="oldLName">
                                 </div>
                                 <div class="form-group">
                                     <label>Contact No</label>
                                     <input type="number" class="form-control" id="contact" name="contact" value="<?php echo $row['ContactNo']; ?>">
+                                    <input type="hidden" value="<?= $row['ContactNo']; ?>" id="oldContact" name="oldContact">
                                 </div>
 
-                                <div class="row">
+                                <div class="row mb-3">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Profile Picture</label>
@@ -89,10 +94,10 @@ if ($uid == $data) {
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <img src="images/ProfilePicture/<?php echo $row['ProfileImage']; ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="img.png" style="height: 150px;">
+                                        <img src="images/ProfilePicture/<?php echo $row['ProfileImage']; ?>" class="img-fluid" alt="img.png" style="height: auto; width: 200px;">
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row mb-3">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Driver License</label>
@@ -107,11 +112,11 @@ if ($uid == $data) {
                                     </div>
 
                                     <div class="col-md-6">
-                                        <img src="images/DrivingLicense/<?php echo $row['DriversLicense']; ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="img.png" style="height: 150px;">
+                                        <img src="images/DrivingLicense/<?php echo $row['DriversLicense']; ?>" class="img-fluid" alt="img.png" style="height: auto; width: 200px;">
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row mb-3">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Security License</label>
@@ -126,11 +131,11 @@ if ($uid == $data) {
                                     </div>
 
                                     <div class="col-md-6">
-                                        <img src="images/SecurityLicense/<?php echo $row['SecurityLicense']; ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="img.png" style="height: 150px;">
+                                        <img src="images/SecurityLicense/<?php echo $row['SecurityLicense']; ?>" class="img-fluid" alt="img.png" style="height: auto; width: 200px;">
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row mb-3">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Covid Vaccination</label>
@@ -145,12 +150,12 @@ if ($uid == $data) {
                                     </div>
 
                                     <div class="col-md-6">
-                                        <img src="images/CovidVacc/<?php echo $row['CovidVacc']; ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="img.png" style="height: 150px;">
+                                        <img src="images/CovidVacc/<?php echo $row['CovidVacc']; ?>" class="img-fluid" alt="img.png" style="height: auto; width: 200px;">
                                     </div>
                                 </div>
 
 
-                                <div class="row">
+                                <div class="row mb-3">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>First Aid</label>
@@ -164,11 +169,10 @@ if ($uid == $data) {
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <img src="images/FirstAid/<?php echo $row['FirstAid']; ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="img.png" style="height: 150px;">
+                                        <img src="images/FirstAid/<?php echo $row['FirstAid']; ?>" class="img-fluid" alt="img.png" style="height: 140px; width: 200px;">
                                     </div>
                                 </div>
-
-                                <div class="row">
+                                <div class="row mb-3">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>RSA</label>
@@ -183,7 +187,7 @@ if ($uid == $data) {
                                     </div>
 
                                     <div class="col-md-6">
-                                        <img src="images/RSA/<?php echo $row['RSALicense']; ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="img.png" style="height: 150px;">
+                                        <img src="images/RSA/<?php echo $row['RSALicense']; ?>" class="img-fluid" alt="img.png" style="height: auto; width: 200px;">
                                     </div>
                                 </div>
 
@@ -191,7 +195,8 @@ if ($uid == $data) {
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" name="updateProf" id="updateProf" class="btn btn-primary">UPDATE</button>
+                                <button type="submit" name="updateProf" id="updateProf" class="btn btn-primary" >UPDATE</button>
+                                <a href="Settings.php" class="btn btn-danger">CANCEL</a>
                             </div>
                         </form>
                     </div>
@@ -213,6 +218,8 @@ if ($uid == $data) {
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+
 <?php
 
 include './resources/template/footer/dashFoot.php';

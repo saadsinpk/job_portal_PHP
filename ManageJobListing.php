@@ -1,12 +1,13 @@
 <?php
-session_start();
+if(!isset($_SESSION)) { session_start(); }
+ob_start();
 
 include './resources/DBconnection/config.php';
 include './resources/template/head/dashHead.php';
 include './PHPFiles/DeleteJobPHP.php';
 
 if ($_SESSION["U-Email"] == null) {
-    header('Location: Login.php');
+    echo "<script>window.location = 'Login.php';</script>";
 }
 
 $q =  "Select * from users Where uemail = '" . $_SESSION["U-Email"] . "'";
@@ -23,7 +24,7 @@ $result = mysqli_fetch_array($check);
 $data = $result['Uid'];
 
 if ($uid != $data) {
-    header('Location: CreateProfile.php');
+    echo "<script>window.location = 'CreateProfile.php';</script>";
 }
 
 $q = "Select * from joblist WHERE Uid = $uid";
@@ -93,7 +94,7 @@ $result = mysqli_query($link, $q);
                                             <th>Description</th>
                                             <th>MasterLicenseNo</th>
                                             <th>Status</th>
-                                            <th></th>
+                                            <th>Posted On</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -132,11 +133,13 @@ $result = mysqli_query($link, $q);
                                                         <?php echo $row["Status"]; ?>
                                                     </td>
                                                     <td>
-                                                        <a name="getUser" class="btn btn-block bg-gradient-success" href="updateJob.php?id=<?php echo $row['JobId'] ?>">Update</a>
+                                                        <?php echo $row["Timestamp"]; ?>
                                                     </td>
                                                     <td>
+                                                    <a name="getUser" class="btn btn-block bg-gradient-success mb-2" href="updateJob.php?id=<?php echo $row['JobId'] ?>">Update</a>
+
                                                         <form method="get">
-                                                        <input type="text" name="Jobid" value="<?php echo $row['JobId'] ?>" hidden>
+                                                            <input type="text" name="Jobid" value="<?php echo $row['JobId'] ?>" hidden>
                                                             <a class="btn btn-block bg-gradient-danger" href="ManageJobListing.php?id=<?php echo $row['JobId'] ?>" name="cancelListing" onclick="return  confirm('do you want to delete Y/N')">Cancel Listing</a>
                                                         </form>
                                                     </td>

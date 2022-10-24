@@ -1,10 +1,10 @@
-
     <?php
+    if(!isset($_SESSION)) { session_start(); }
 
     // include './resources/DBconnection/config.php';
 
     if ($_SESSION["U-Email"] == null) {
-        header('Location: Login.php');
+        echo "<script>window.location = 'Login.php';</script>";
     }
 
 

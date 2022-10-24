@@ -1,9 +1,11 @@
 <?php
-session_start();
+if(!isset($_SESSION)) { session_start(); }
+ob_start();
 include_once 'resources/DBconnection/config.php';
 
 if($_SESSION["U-Email"] == null){
-    header('Location: Login.php');
+    echo "<script>window.location = 'Login.php';</script>";
+    exit();
 }
 
 
@@ -30,26 +32,38 @@ if (isset($_GET['id'])) {
     if (isset($_POST['updateJob'])) {
 
         $Loc = $_POST['location'];
-        $Days = $_POST['selecteddays'];
+        $Days = $_POST['days'];
         $Hours = $_POST['hours'];
         $Post = $_POST['position'];
         $Pay = $_POST['pay'];
         $Desc = $_POST['desc'];
         $mlNum = $_POST['MLnum'];
         $Status = $_POST['status'];
+        $date = date("Y-m-d h:i:s a");
 
         if ($Post == "Other ( Name )") {
             $p = $_POST['positions'];
             $Post = $p;
         }
 
+        $Days_String = "";
 
-        $q = "UPDATE joblist SET `Location`='$Loc',`Days`='$Days',`Hours`='$Hours',`Position`='$Post',`Pay`='$Pay',`Description`='$Desc',`MasterLicenseNo`='$mlNum',`Status`='$Status', `Uid`= '$uid' WHERE JobId='$jobId'";
+        for ($i=0; $i < count($Days); $i++){
+            if($i == count($Days) -1){
+                $Days_String .= $Days[$i];
+            }else{
+                $Days_String .= $Days[$i] . ", "   ;
+            }
+        }
+       
+
+        $q = "UPDATE joblist SET `Location`='$Loc',`Days`='$Days_String',`Hours`='$Hours',`Position`='$Post',`Pay`='$Pay',`Description`='$Desc',`MasterLicenseNo`='$mlNum',`Status`='$Status', `UpdatedOn` = '$date' , `Uid`= '$uid' WHERE JobId='$jobId'";
         $check = mysqli_query($link, $q);
 
         if ($check) {
             $_SESSION['msg'] = "Job Updated successfully!";
-            header('Location: ManageJobListing.php');
+            echo "<script>window.location = 'ManageJobListing.php';</script>";
+            exit();
         } else {
             $_SESSION['msg'] = "Job Update Failed. Please Try Again!";
         }

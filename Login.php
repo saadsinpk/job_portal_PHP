@@ -1,4 +1,5 @@
 <?php
+if(!isset($_SESSION)) { session_start(); }
 include 'PHPFiles/LoginPHP.php';
 ?>
 
@@ -69,7 +70,7 @@ include 'PHPFiles/LoginPHP.php';
 
 					<div class="text-center">
 						<div class="saprator my-4"><span>OR</span></div>
-						<p class="mb-0 text-muted">Don’t have an account? <a href="Register.php" class="f-w-400">Signup</a></p>
+						<p class="mb-0 text-muted">Don’t have an account? <a href="Register.php" class="f-w-400">Create Account</a></p>
 					</div>
 				</div>
 			</form>

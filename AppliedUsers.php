@@ -1,5 +1,6 @@
 <?php
-session_start();
+if(!isset($_SESSION)) { session_start(); }
+ob_start();
 include './resources/template/head/dashHead.php';
 include 'PHPFiles/AppliedUsersPHP.php';
 ?>

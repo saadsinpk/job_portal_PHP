@@ -1,4 +1,5 @@
 <?php
+if(!isset($_SESSION)) { session_start(); }
 include 'PHPFiles/DashboardPHP.php';
 include './resources/template/head/dashHead.php';
 include 'PHPFiles/ApplyJobPHP.php';
@@ -55,7 +56,6 @@ include 'PHPFiles/ApplyJobPHP.php';
     $row2 =  mysqli_query($link, $qu);
     $list = mysqli_fetch_array($row2);
 
-
     ?>
 
 
@@ -93,6 +93,7 @@ include 'PHPFiles/ApplyJobPHP.php';
                                         <th>Description</th>
                                         <th>MasterLicenseNo</th>
                                         <th>Status</th>
+                                        <th>Posted On</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -130,14 +131,34 @@ include 'PHPFiles/ApplyJobPHP.php';
                                                 <td>
                                                     <?php echo $row["Status"]; ?>
                                                 </td>
+                                                <td>
+                                                    <?php echo $row["Timestamp"]; ?>
+                                                </td>
 
-                                                <?php if ($row['Uid'] == $uid) {
+                                                <?php
+                                                if ($list != null) {
+                                                    if ($uid == $list['UserId'] && $uid != $row['Uid']) {
                                                 ?>
-                                                    <td>
-                                                        <a href="ManageJobListing.php" class="btn btn-block bg-gradient-primary">Manage</a>
-                                                    </td>
+                                                        <td>
+                                                            <input type="submit" class="btn btn-block bg-gradient-success" disabled value="APPLIED" name="applyjob">
+                                                        </td>
+                                                    <?php
+                                                    } else {
+                                                    ?>
 
-                                                    <?php }else{ ?>
+                                                        <td>
+                                                            <a href="ManageJobListing.php" class="btn btn-block bg-gradient-primary">Manage</a>
+                                                        </td>
+
+                                                    <?php }
+                                                } else {
+                                                    if ($row['Uid'] == $uid) {
+                                                    ?>
+                                                        <td>
+                                                            <a href="ManageJobListing.php" class="btn btn-block bg-gradient-primary">Manage</a>
+                                                        </td>
+
+                                                    <?php } else { ?>
                                                         <td>
                                                             <form method="post">
                                                                 <input type="text" class="btn btn-block bg-gradient-success" value="<?php echo $row['JobId'] ?>" id="jobid" name="jobid" hidden>
@@ -145,7 +166,13 @@ include 'PHPFiles/ApplyJobPHP.php';
                                                             </form>
                                                         </td>
 
-                                                <?php } ?>
+                                                <?php }
+                                                } ?>
+
+
+
+
+
                                             </tr>
                                         <?php
                                         } else {

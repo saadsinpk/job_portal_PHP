@@ -1,9 +1,10 @@
 <?php
+if(!isset($_SESSION)) { session_start(); }
 include './resources/DBconnection/config.php';
 
 
 if ($_SESSION["U-Email"] === null) {
-    header('Location: Login.php');
+    echo "<script>window.location = 'Login.php';</script>";
 }
 
 
@@ -21,7 +22,7 @@ $result = mysqli_fetch_array($check);
 $data = $result['Uid'];
 
 if ($uid != $data) {
-    header('Location: CreateProfile.php');
+    echo "<script>window.location = 'CreateProfile.php';</script>";
 }
 
 
@@ -33,13 +34,6 @@ if (isset($_POST['updateProf'])) {
     $firstname = $_POST['fname'];
     $lasttname = $_POST['lname'];
     $contact = $_POST['contact'];
-
-    $oldpp = $_POST['oldpp'];
-    $olddl = $_POST['olddl'];
-    $oldsl = $_POST['oldsl'];
-    $oldcv = $_POST['oldcv'];
-    $oldfa = $_POST['oldfa'];
-    $oldrsa = $_POST['oldrsa'];
 
     $dLicensefilename = $_FILES["dl"]["name"];
     $DLtempname = $_FILES["dl"]["tmp_name"];
@@ -58,28 +52,6 @@ if (isset($_POST['updateProf'])) {
 
     $profilefilename = $_FILES["pp"]["name"];
     $Proftempname = $_FILES["pp"]["tmp_name"];
-    
-    if($dLicensefilename == null){
-        $dLicensefilename = $olddl;
-    }
-        
-        if($sLfilename == null){
-        $sLfilename =$oldsl;
-    }
-    
-    if($cVfilename == null){
-        $cVfilename =$oldcv;
-    }
-    if($fAfilename == null){
-        $fAfilename =$oldfa;
-    }
-    if($RSAfilename == null){
-        $RSAfilename = $oldrsa;
-    }
-    if($profilefilename == null){
-        $profilefilename = $oldpp;
-    }
-
 
     $folder = "images/DrivingLicense/" . $dLicensefilename;
     $folder1 = "images/SecurityLicense/" . $sLfilename;
@@ -88,57 +60,60 @@ if (isset($_POST['updateProf'])) {
     $folder4 = "images/RSA/" . $RSAfilename;
     $folder5 = "images/ProfilePicture/" . $profilefilename;
 
-    
+
     $q = "SELECT * from userinfo WHERE 'Uid' = $uid";
     $check = mysqli_query($link, $q);
 
-    if ($check) {
-
-        $qu = "UPDATE `userinfo` SET `FirstName`='$firstname',`LastName`='$lasttname',`ContactNo`='$contact',`DriversLicense`='$dLicensefilename',`SecurityLicense`='$sLfilename',`CovidVacc`='$cVfilename',`FirstAid`='$fAfilename',`RSALicense`='$RSAfilename',`ProfileImage`='$profilefilename',`Uid`='$uid' WHERE Uid = $uid";
-
+    $qu = "UPDATE `userinfo` SET `FirstName`='$firstname',`LastName`='$lasttname',`ContactNo`='$contact', `Uid`='$uid' WHERE `Uid` = $uid";
         $res = mysqli_query($link, $qu);
 
-        if($res){
-            $_SESSION['updatePass'] = "Profile Updated Successfully.";
-            echo "<script>window.location = 'Settings.php';</script>";
-        }
+    if (move_uploaded_file($DLtempname, $folder)) {
 
-
-            if (move_uploaded_file($DLtempname, $folder)) {
-                $_SESSION['success']  = "Profile Updated Successfully.";
-            } else {
-                echo "<h3>  Failed Creating Profile.!</h3>";
-            }
-
-            if (move_uploaded_file($SLtempname, $folder1)) {
-                $_SESSION['success']  = "Profile Updated Successfully.";
-            } else {
-                echo "<h3>  Failed Creating Profile.!</h3>";
-            }
-
-            if (move_uploaded_file($CVtempname, $folder2)) {
-                $_SESSION['success']  = "Profile Updated Successfully.";
-            } else {
-                echo "<h3>  Failed Creating Profile.!</h3>";
-            }
-        
-            if (move_uploaded_file($FAtempname, $folder3)) {
-                $_SESSION['success']  = "Profile Updated Successfully.";
-            } else {
-                echo "<h3>  Failed Creating Profile.!</h3>";
-            }
-        
-            if (move_uploaded_file($RSAtempname, $folder4)) {
-                $_SESSION['success']  = "Profile Updated Successfully.";
-            } else {
-                echo "<h3>  Failed Creating Profile.!</h3>";
-            }
-       
-            if (move_uploaded_file($Proftempname, $folder5)) {
-                $_SESSION['success']  = "Profile Updated Successfully.";
-            } else {
-                echo "<h3>  Failed Creating Profile.!</h3>";
-            }
-        
+        $qu = "UPDATE `userinfo` SET `FirstName`='$firstname',`LastName`='$lasttname',`ContactNo`='$contact',`DriversLicense`='$dLicensefilename' WHERE `Uid` = $uid";
+        $res = mysqli_query($link, $qu);
+        $_SESSION['success']  = "Profile Updated Successfully.";
     }
+
+    if (move_uploaded_file($SLtempname, $folder1)) {
+
+        $qu = "UPDATE `userinfo` SET `SecurityLicense`='$sLfilename' WHERE `Uid` = $uid";
+        $res = mysqli_query($link, $qu);
+        $_SESSION['success']  = "Profile Updated Successfully.";
+    }
+
+
+    if (move_uploaded_file($CVtempname, $folder2)) {
+
+        $qu = "UPDATE `userinfo` SET `CovidVacc`='$cVfilename' WHERE `Uid` = $uid";
+        $res = mysqli_query($link, $qu);
+        $_SESSION['success']  = "Profile Updated Successfully.";
+    }
+
+
+    if (move_uploaded_file($FAtempname, $folder3)) {
+
+        $qu = "UPDATE `userinfo` SET `FirstAid`='$fAfilename' WHERE `Uid` = $uid";
+        $res = mysqli_query($link, $qu);
+        $_SESSION['success']  = "Profile Updated Successfully.";
+    }
+
+    if (move_uploaded_file($RSAtempname, $folder4)) {
+
+        $qu = "UPDATE `userinfo` SET `RSALicense`='$RSAfilename' WHERE `Uid` = $uid";
+        $res = mysqli_query($link, $qu);
+        $_SESSION['success']  = "Profile Updated Successfully.";
+    }
+    
+    if (move_uploaded_file($Proftempname, $folder5)) {
+
+        $qu = "UPDATE `userinfo` SET `ProfileImage`='$profilefilename' WHERE `Uid` = $uid";
+        $res = mysqli_query($link, $qu);
+        $_SESSION['success']  = "Profile Updated Successfully.";
+    }
+
+    if ($res) {
+        $_SESSION['updatePass'] = "Profile Updated Successfully.";
+        echo "<script>window.location = 'Settings.php';</script>";
+    }
+
 }

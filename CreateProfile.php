@@ -1,4 +1,5 @@
 <?php
+if(!isset($_SESSION)) { session_start(); }
 include 'PHPFiles/CreateProfilePHP.php';
 include 'resources/template/head/head.php';
 ?>
@@ -91,5 +92,5 @@ include 'resources/template/head/head.php';
 </div>
 
 <?php
-include  'resources/template/head/head.php';
+include  'resources/template/footer/footer.php';
 ?>

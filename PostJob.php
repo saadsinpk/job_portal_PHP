@@ -1,4 +1,5 @@
 <?php
+if(!isset($_SESSION)) { session_start(); }
 include 'PHPFiles/PostJobPHP.php';
 include './resources/template/head/dashHead.php';
 ?>

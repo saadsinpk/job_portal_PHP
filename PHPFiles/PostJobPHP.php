@@ -1,12 +1,12 @@
-
     <?php
+    if(!isset($_SESSION)) { session_start(); }
 
-    session_start();
+    ob_start();
 
     include './resources/DBconnection/config.php';
 
     if ($_SESSION["U-Email"] == null) {
-        header('Location: Login.php');
+        echo "<script>window.location = 'Login.php';</script>";
     }
 
 
@@ -52,7 +52,7 @@
         }
 
         if ($counter > 0) {
-            header('Location: ManageJobListing.php');
+            echo "<script>window.location = 'ManageJobListing.php';</script>";
             exit();
         }
     }

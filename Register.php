@@ -1,4 +1,5 @@
 <?php
+if(!isset($_SESSION)) { session_start(); }
 include 'PHPFiles/RegisterPHP.php';
 ?>
 <!DOCTYPE html>
@@ -33,7 +34,7 @@ include 'PHPFiles/RegisterPHP.php';
 			<form method="post">
 				<div class=" auth-content">
 					<img src="resources\template\assets\AuthAssets\images/auth/auth-logo-dark.png" alt="" class="img-fluid mb-4 d-block d-xl-none d-lg-none">
-					<h4 class="mb-3 f-w-400">Sign up</h4>
+					<h4 class="mb-3 f-w-400">Create Account</h4>
 					<div class="form-group mb-3">
 						<label class="floating-label" for="Email">Email address</label>
 						<input type="email" class="form-control" name="u-email" id="u-email" required placeholder="">
@@ -42,7 +43,7 @@ include 'PHPFiles/RegisterPHP.php';
 						<label class="floating-label" for="Password">Password</label>
 						<input type="password" class="form-control"  name="u-password" id="u-password" placeholder="" required>
 					</div>
-					<button type="submit" name="reg" class="btn btn-primary btn-block mb-4">Sign up</button>
+					<button type="submit" name="reg" class="btn btn-primary btn-block mb-4">Create Account</button>
 					<?php
 					if (isset($_SESSION['message'])) {
 					?>

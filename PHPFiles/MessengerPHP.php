@@ -1,8 +1,9 @@
 <?php 
+if(!isset($_SESSION)) { session_start(); }
     include './resources/DBconnection/config.php';
 
 if ($_SESSION["U-Email"] == null) {
-    header('Location: Login.php');
+    echo "<script>window.location = 'Login.php';</script>";
 }
 
 
@@ -22,7 +23,7 @@ $currentUser = $result['Uid'];
 $_SESSION['user'] = $currentUser;
 
 if ($uid != $currentUser) {
-    header('Location: CreateProfile.php');
+    echo "<script>window.location = 'CreateProfile.php';</script>";
 }
 
 

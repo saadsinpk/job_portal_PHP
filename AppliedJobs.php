@@ -1,11 +1,12 @@
 <?php
+if(!isset($_SESSION)) { session_start(); }
 include 'PHPFiles/DashboardPHP.php';
 include './resources/template/head/dashHead.php';
 include 'PHPFiles/AppliedJobsPHP.php';
 
 
 if ($_SESSION["U-Email"] == null) {
-    header('Location: Login.php');
+    echo "<script>window.location = 'Login.php';</script>";
 }
 
 
@@ -23,7 +24,7 @@ $userresult = mysqli_fetch_array($check);
 $data = $userresult['Uid'];
 
 if ($uid != $data) {
-    header('Location: CreateProfile.php');
+    echo "<script>window.location = 'CreateProfile.php';</script>";
 }
 
 ?>
