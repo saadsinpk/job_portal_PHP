@@ -1,5 +1,7 @@
 <?php
-if(!isset($_SESSION)) { session_start(); }
+if (!isset($_SESSION)) {
+    session_start();
+}
 include 'PHPFiles/DashboardPHP.php';
 include './resources/template/head/dashHead.php';
 include 'PHPFiles/ApplyJobPHP.php';
@@ -51,11 +53,6 @@ include 'PHPFiles/ApplyJobPHP.php';
     <?php
     $q = "Select * from joblist";
     $result = mysqli_query($link, $q);
-
-    $qu = "Select * from appliedjobs WHERE UserId = '" . $uid . "'";
-    $row2 =  mysqli_query($link, $qu);
-    $list = mysqli_fetch_array($row2);
-
     ?>
 
 
@@ -73,8 +70,9 @@ include 'PHPFiles/ApplyJobPHP.php';
                                 ?>
                                     <div class="alert alert-success alert-dismissible" id="myElem">
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                        <h5><i class="icon fas fa-check"></i> Success!</h5>
-                                        <?php echo $_SESSION['msg'] ?>
+                                        <h3 class="mr-5"><i class="icon fas fa-check"></i> Success!</h3>
+                                        <h5><?php echo $_SESSION['msg'] . "</br>" ?></h5>
+                                        <h5 class="text-warning text-underline" style="text-decoration: underline;"><?php echo $_SESSION['result'] ?></h5>
                                     </div>
                                 <?php unset($_SESSION['msg']);
                                 } ?>
@@ -102,6 +100,9 @@ include 'PHPFiles/ApplyJobPHP.php';
                                     $i = 0;
 
                                     while ($row = mysqli_fetch_array($result)) {
+                                        $qu = "Select * from appliedjobs WHERE UserId = '" . $uid . "' AND JobId = '" . $row['JobId'] . "'";
+                                        $row2 =  mysqli_query($link, $qu);
+                                        $list = mysqli_fetch_array($row2);
                                     ?>
                                         <?php
                                         if (mysqli_num_rows($result) > 0) {
@@ -136,8 +137,8 @@ include 'PHPFiles/ApplyJobPHP.php';
                                                 </td>
 
                                                 <?php
-                                                if ($list != null) {
-                                                    if ($uid == $list['UserId'] && $uid != $row['Uid']) {
+                                                if ($row['JobId'] == $list['JobId']) {
+                                                    if ($uid != $row['Uid']) {
                                                 ?>
                                                         <td>
                                                             <input type="submit" class="btn btn-block bg-gradient-success" disabled value="APPLIED" name="applyjob">
@@ -161,8 +162,11 @@ include 'PHPFiles/ApplyJobPHP.php';
                                                     <?php } else { ?>
                                                         <td>
                                                             <form method="post">
-                                                                <input type="text" class="btn btn-block bg-gradient-success" value="<?php echo $row['JobId'] ?>" id="jobid" name="jobid" hidden>
-                                                                <input type="submit" class="btn btn-block bg-gradient-success" value="Apply" name="applyjob">
+                                                                <form method="post">
+                                                                    <input type="text" class="btn btn-block bg-gradient-success" value="<?php echo $row['JobId'] ?>" id="jobid" name="jobid" hidden>
+                                                                    <input type="text" class="btn btn-block bg-gradient-success" value="<?php echo $row['Uid'] ?>" id="advertiserID" name="advertiserID" hidden>
+                                                                    <input type="submit" class="btn btn-block bg-gradient-success" value="Apply" name="applyjob">
+                                                                </form>
                                                             </form>
                                                         </td>
 

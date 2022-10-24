@@ -1,6 +1,6 @@
 <?php
 
-$link = mysqli_connect("108.167.133.11", "hiresecu_db", "-mJ.cG@)3fb1", "hiresecu_job_portal");
+$link = mysqli_connect("localhost", "root", "", "job_portal");
 
 if ($_SESSION["U-Email"] == null) {
   echo "<script>window.location = 'Login.php';</script>";
@@ -144,7 +144,7 @@ $result = mysqli_fetch_array($check);
               <a href="AppliedUsers.php" class="nav-link">
                 <i class="nav-icon fas fa-envelope"></i>
                 <p>
-                  User Applications (Inbox)
+                  User Applications (Inbox) 
                 </p>
               </a>
             </li>

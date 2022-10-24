@@ -1,5 +1,7 @@
 <?php
-if(!isset($_SESSION)) { session_start(); }
+if (!isset($_SESSION)) {
+    session_start();
+}
 include 'PHPFiles/DashboardPHP.php';
 include './resources/template/head/dashHead.php';
 include 'PHPFiles/AppliedJobsPHP.php';

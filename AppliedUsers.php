@@ -1,5 +1,7 @@
 <?php
-if(!isset($_SESSION)) { session_start(); }
+if (!isset($_SESSION)) {
+    session_start();
+}
 ob_start();
 include './resources/template/head/dashHead.php';
 include 'PHPFiles/AppliedUsersPHP.php';
@@ -48,6 +50,9 @@ include 'PHPFiles/AppliedUsersPHP.php';
                                     <tr>
                                         <th>Name</th>
                                         <th>Contact#</th>
+                                        <th>Location</th>
+                                        <th>Positions</th>
+                                        <th>MasterLicense#</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -55,38 +60,51 @@ include 'PHPFiles/AppliedUsersPHP.php';
                                     <?php
                                     $i = 0;
 
-                                    while ($row = mysqli_fetch_array($query)) {
+                                    while ($users = mysqli_fetch_array($Usersquery)) {
+                                        while ($JobRow = mysqli_fetch_array($Jobresult)) {
+                                            while ($row = mysqli_fetch_array($query)) {
                                     ?>
-                                        <?php
-                                        if (mysqli_num_rows($query) > 0) {
-                                            if ($row['Uid'] != $uid) {
-                                        ?>
-                                                <tr>
-                                                    <td>
-                                                        <?php echo $row["FirstName"] . " " . $row["LastName"]; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $row["ContactNo"]; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <form method="get" action="Messenger.php">
+                                                <?php
+                                                if (mysqli_num_rows($query) > 0) {
+                                                    if ($row['Uid'] != $uid && $users['Uid'] == $JobRow['Uid']) {
+                                                ?>
+                                                        <tr>
+                                                            <td>
+                                                                <?php echo $row["FirstName"] . " " . $row["LastName"]; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $row["ContactNo"]; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $JobRow["Location"]; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $JobRow["Position"]; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $JobRow["MasterLicenseNo"]; ?>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <form method="get" action="Messenger.php">
 
-                                                            <input type="text" name="id" id="id" value="<?php echo $row["Uid"]; ?>" hidden>
+                                                                    <input type="text" name="id" id="id" value="<?php echo $row["Uid"]; ?>" hidden>
 
-                                                            <button type="submit" class="btn btn-primary" title="Start Chat" name="chat" id="chat">
-                                                                <i class="fas fa-comments"></i> CHAT
-                                                            </button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                        <?php
-                                            }
-                                        } else {
-                                            echo "No result found";
-                                        }
-                                        ?>
+                                                                    <button type="submit" class="btn btn-primary" title="Start Chat" name="chat" id="chat">
+                                                                        <i class="fas fa-comments"></i> CHAT
+                                                                    </button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                <?php
+                                                    }
+                                                } else {
+                                                    echo "No result found";
+                                                }
+                                                ?>
                                     <?php
-                                        $i++;
+                                                $i++;
+                                            }
+                                        }
                                     }
                                     ?>
                                 </tbody>
