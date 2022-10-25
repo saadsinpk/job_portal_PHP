@@ -29,7 +29,7 @@ include 'PHPFiles/AppliedUsersPHP.php';
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Available Jobs.</h3>
+                            <h3 class="card-title">Inbox Jobs.</h3>
                             <div class="col-sm-12 text-center">
                                 <?php
                                 if (isset($_SESSION['msg'])) {
@@ -49,10 +49,6 @@ include 'PHPFiles/AppliedUsersPHP.php';
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Contact#</th>
-                                        <th>Location</th>
-                                        <th>Positions</th>
-                                        <th>MasterLicense#</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -60,54 +56,45 @@ include 'PHPFiles/AppliedUsersPHP.php';
                                     <?php
                                     $i = 0;
 
-                                    while ($users = mysqli_fetch_array($Usersquery)) {
-                                        while ($JobRow = mysqli_fetch_array($Jobresult)) {
-                                            while ($row = mysqli_fetch_array($query)) {
-                                    ?>
-                                                <?php
-                                                if (mysqli_num_rows($query) > 0) {
-                                                    if ($row['Uid'] != $uid && $users['Uid'] == $JobRow['Uid']) {
-                                                ?>
-                                                        <tr>
-                                                            <td>
-                                                                <?php echo $row["FirstName"] . " " . $row["LastName"]; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php echo $row["ContactNo"]; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php echo $JobRow["Location"]; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php echo $JobRow["Position"]; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php echo $JobRow["MasterLicenseNo"]; ?>
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <form method="get" action="Messenger.php">
-
-                                                                    <input type="text" name="id" id="id" value="<?php echo $row["Uid"]; ?>" hidden>
-
-                                                                    <button type="submit" class="btn btn-primary" title="Start Chat" name="chat" id="chat">
-                                                                        <i class="fas fa-comments"></i> CHAT
-                                                                    </button>
-                                                                </form>
-                                                            </td>
-                                                        </tr>
-                                                <?php
-                                                    }
-                                                } else {
-                                                    echo "No result found";
-                                                }
-                                                ?>
-                                    <?php
-                                                $i++;
+                                    $q = "SELECT * FROM appliedjobs LEFT JOIN joblist ON joblist.JobId = appliedjobs.JobId LEFT JOIN userinfo ON userinfo.UId = joblist.Uid WHERE appliedjobs.UserId = '$uid' GROUP BY joblist.Uid";
+                                    $JobresultNew = mysqli_query($link, $q);
+                                    $q2 = "SELECT * FROM joblist LEFT JOIN appliedjobs ON appliedjobs.JobId = joblist.JobId LEFT JOIN userinfo ON userinfo.UId = appliedjobs.UserId WHERE joblist.Uid = '$uid'";
+                                    $JobresultNew2 = mysqli_query($link, $q2);
+                                    $total_row = mysqli_num_rows($JobresultNew) + mysqli_num_rows($JobresultNew2);
+                                    if ($total_row > 0) {
+                                        while ($row = mysqli_fetch_array($JobresultNew)) {
+                                            if(!empty($row["Uid"])) {
+                                        ?>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $row["FirstName"] . " " . $row["LastName"]; ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="Messenger.php?id=<?php echo $row["Uid"];?>">CHAT</a>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                            $i++;
                                             }
                                         }
-                                    }
+                                        while ($row = mysqli_fetch_array($JobresultNew2)) {
+                                        ?>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $row["FirstName"] . " " . $row["LastName"]; ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="Messenger.php?id=<?php echo $row["Uid"];?>">CHAT</a>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        $i++;
+                                        }
+                                    } else {
+                                        echo "<tr><td>No result found</td><td></td></tr>";
+                                    }   
                                     ?>
-                                </tbody>
+                                </tbody>    
                             </table>
 
                         </div>

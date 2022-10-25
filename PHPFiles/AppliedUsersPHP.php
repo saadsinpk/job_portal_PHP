@@ -20,10 +20,6 @@ $q2 =  "Select * from userinfo Where Uid = '$uid'";
 $check = mysqli_query($link, $q2);
 $result = mysqli_fetch_array($check);
 
-$allUsers = "SELECT * FROM userinfo";
-$Usersquery = mysqli_query($link,$allUsers);
-
-
 $data = $result['Uid'];
 
 if ($uid != $data) {

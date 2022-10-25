@@ -62,8 +62,7 @@ $userInfo = mysqli_fetch_array($userQuery);
 
                                         <?php
                                         $i = 0;
-
-                                        $query = "SELECT * FROM chat";
+                                        $query = "SELECT * FROM chat WHERE sender_userid = '".$user."' AND reciever_userid = '".$uid."' OR sender_userid = '".$uid."' AND reciever_userid = '".$user."' ";
                                         $run = mysqli_query($link, $query);
 
                                         $senderInfo = "SELECT * FROM userinfo WHERE `Uid` = '$uid'";
@@ -71,15 +70,11 @@ $userInfo = mysqli_fetch_array($userQuery);
                                         $senderData = mysqli_fetch_array($getData);
 
 
-
-                                        while ($data = mysqli_fetch_array($run)) {
+                                        if (mysqli_num_rows($run) > 0) {
+                                            while ($data = mysqli_fetch_array($run)) {
                                         ?>
                                             <?php if ($data['reciever_userid'] == $uid) { ?>
 
-
-                                                <?php
-                                                if (mysqli_num_rows($run) > 0) {
-                                                ?>
                                                     <!-- Message. Default to the left -->
                                                     <div class="direct-chat-msg">
                                                         <div class="direct-chat-infos clearfix">
@@ -99,11 +94,6 @@ $userInfo = mysqli_fetch_array($userQuery);
                                                         <!-- /.direct-chat-text -->
                                                     </div>
                                                     <!-- /.direct-chat-msg -->
-                                                <?php
-                                                } else {
-                                                    echo "No result found";
-                                                }
-                                                ?>
                                             <?php }
                                             if ($data['sender_userid'] == $uid) { ?>
 
@@ -126,11 +116,13 @@ $userInfo = mysqli_fetch_array($userQuery);
                                                 </div>
                                                 <!-- /.direct-chat-msg -->
 
-                                            <?php } ?>
-                                        <?php
+                                            <?php } 
                                             $i++;
                                         }
-                                        ?>
+                                            } else {
+                                                echo "No result found";
+                                            }
+                                            ?>
 
                                     </div>
                                     <!--/.direct-chat-messages-->
