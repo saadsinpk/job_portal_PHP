@@ -38,7 +38,7 @@ if ($uid != $data) {
     echo "<script>window.location = 'CreateProfile.php';</script>";
 }
 
-$q = "Select * from appliedjobs LEFT JOIN userinfo ON userinfo.UserId = appliedjobs.UserId WHERE JobId = '".$_GET['id']."' ";
+$q = "Select * from appliedjobs LEFT JOIN userinfo ON userinfo.UId = appliedjobs.UserId WHERE JobId = '".$_GET['id']."' ";
 $result = mysqli_query($link, $q);
 
 
@@ -142,7 +142,7 @@ $result = mysqli_query($link, $q);
                                                         <a href="images/RSA/<?php echo $row["RSALicense"]; ?>">Download</a>
                                                     </td>
                                                     <td>
-                                                        <?php echo 'test'; ?>
+                                                        <?php echo $row['Timestamp']; ?>
                                                     </td>
                                                 </tr>
                                             <?php
