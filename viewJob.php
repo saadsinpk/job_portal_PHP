@@ -104,6 +104,7 @@ $result = mysqli_query($link, $q);
                                             <th>Covid</th>
                                             <th>Aid</th>
                                             <th>RSA</th>
+                                            <th>Chat</th>
                                             <th>Posted On</th>
                                         </tr>
                                     </thead>
@@ -140,6 +141,9 @@ $result = mysqli_query($link, $q);
                                                     </td>
                                                     <td>
                                                         <a href="images/RSA/<?php echo $row["RSALicense"]; ?>">Download</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/Messenger.php?id=<?php echo $row["UId"]; ?>">Chat Now</a>
                                                     </td>
                                                     <td>
                                                         <?php echo $row['Timestamp']; ?>
