@@ -143,7 +143,7 @@ $result = mysqli_query($link, $q);
                                                         <a href="images/RSA/<?php echo $row["RSALicense"]; ?>">Download</a>
                                                     </td>
                                                     <td>
-                                                        <a href="/Messenger.php?id=<?php echo $row["UId"]; ?>">Chat Now</a>
+                                                        <a href="/Messenger.php?id=<?php echo $row["Uid"]; ?>">Chat Now</a>
                                                     </td>
                                                     <td>
                                                         <?php echo $row['Timestamp']; ?>
