@@ -1,6 +1,6 @@
 <?php
 
-$link = mysqli_connect("localhost", "root", "", "job_portal");
+$link = mysqli_connect("localhost", "root", "", "hiresecu_job_portal");
 
 if ($_SESSION["U-Email"] == null) {
   echo "<script>window.location = 'Login.php';</script>";
@@ -93,62 +93,104 @@ $result = mysqli_fetch_array($check);
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="images/ProfilePicture/<?php echo $result['ProfileImage']; ?>" class="img-circle elevation-2" alt="User Image">
+        <?php if ($res['role'] == 'admin') { ?>
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="images/ProfilePicture/admin_img.png" class="img-circle elevation-3" alt="User Image">
+            </div>
+            <div class="info">
+              <a href="#" class="d-block">Admin Panel</a>
+            </div>
           </div>
-          <div class="info">
-            <a href="#" class="d-block"><?php echo $result['FirstName'] . " " . $result['LastName']; ?></a>
+        <?php } else { ?>
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="images/ProfilePicture/<?php echo $result['ProfileImage']; ?>" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+              <a href="#" class="d-block"><?php echo $result['FirstName'] . " " . $result['LastName']; ?></a>
+            </div>
           </div>
-        </div>
+        <?php } ?>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
+          <?php if ($res['role'] == 'admin') { ?>
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-            <li class="nav-item menu-open mb-2">
-              <a href="Dashboard.php" class="nav-link active">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                  Dashboard
-                </p>
-              </a>
-            </li>
-            <li class="nav-item menu-open mb-2">
-              <a href="ManageJobListing.php" class="nav-link">
-                <i class="nav-icon fas fa-tasks"></i>
-                <p>
-                  Manage Job Listing
-                </p>
-              </a>
-            </li>
-            <li class="nav-item menu-open mb-2">
-              <a href="AppliedJobs.php" class="nav-link">
-                <i class="nav-icon fas fa-edit"></i>
+              <li class="nav-item menu-open mb-2">
+                <a href="AdminDashboard.php" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>
+                    Dashboard
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item menu-open mb-2">
+                <a href="MyTickets.php" class="nav-link">
+                  <i class="nav-icon fas fa-info"></i>
+                  <p>
+                    User Support
+                  </p>
+                </a>
+              </li>
+            </ul>
+          <?php } else { ?>
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+              <li class="nav-item menu-open mb-2">
+                <a href="Dashboard.php" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>
+                    Dashboard
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item menu-open mb-2">
+                <a href="ManageJobListing.php" class="nav-link">
+                  <i class="nav-icon fas fa-tasks"></i>
+                  <p>
+                    Manage Job Listing
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item menu-open mb-2">
+                <a href="AppliedJobs.php" class="nav-link">
+                  <i class="nav-icon fas fa-edit"></i>
 
-                <p>
-                  Applied Jobs
-                </p>
-              </a>
-            </li>
-            <li class="nav-item menu-open mb-2">
-              <a href="PostJob.php" class="nav-link">
-                <i class="nav-icon fas fa-ad"></i>
-                <p>
-                  Advertise Job
-                </p>
-              </a>
-            </li>
-            <li class="nav-item menu-open mb-2">
-              <a href="AppliedUsers.php" class="nav-link">
-                <i class="nav-icon fas fa-envelope"></i>
-                <p>
-                  User Applications (Inbox) 
-                </p>
-              </a>
-            </li>
-          </ul>
+                  <p>
+                    Applied Jobs
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item menu-open mb-2">
+                <a href="PostJob.php" class="nav-link">
+                  <i class="nav-icon fas fa-ad"></i>
+                  <p>
+                    Advertise Job
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item menu-open mb-2">
+                <a href="AppliedUsers.php" class="nav-link">
+                  <i class="nav-icon fas fa-envelope"></i>
+                  <p>
+                    User Applications (Inbox)
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item menu-open mb-2">
+                <a href="ContactSupport.php" class="nav-link">
+                  <i class="nav-icon fas fa-envelope"></i>
+                  <p>
+                    Contact Support
+                  </p>
+                </a>
+              </li>
+            </ul>
+          <?php } ?>
         </nav>
         <!-- /.sidebar-menu -->
       </div>

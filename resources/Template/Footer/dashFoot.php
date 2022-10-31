@@ -71,6 +71,11 @@
       var selected = $("#days :selected").map((_, e) => e.value).get();
       $("#selecteddays").val(selected);
     });
+
+    $('#updateTicket').on('click',function() {
+      var selected = $("#ticket_status :selected").map((_, e) => e.value).get();
+      $("#status").val(selected);
+    });
   });
 
   $('select').selectpicker();

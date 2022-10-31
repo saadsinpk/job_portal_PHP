@@ -5,6 +5,7 @@ if(!isset($_SESSION)) { session_start(); }
     if(isset($_POST['reg'])){
         $email = $_POST['u-email'];
         $password = $_POST['u-password'];
+        $role = 'user';
         // $cpass = $_POST['u-cpassword'];
         $date = date("Y-m-d h:i:s a");
 
@@ -15,7 +16,7 @@ if(!isset($_SESSION)) { session_start(); }
                 
             
             if($pass >=6){            
-                $q = "INSERT INTO users(uemail, upassword, registrationDate) VALUES ('$email','".md5($password)."','$date')";
+                $q = "INSERT INTO users(uemail, upassword, registrationDate,role) VALUES ('$email','".md5($password)."','$date','$role')";
                 $check = mysqli_query($link,$q);
                 $_SESSION['regSuccess']  = "Registration successfull. Please Login to continue.";
                 header('Location: Login.php');

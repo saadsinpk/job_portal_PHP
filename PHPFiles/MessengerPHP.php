@@ -1,6 +1,8 @@
-<?php 
-if(!isset($_SESSION)) { session_start(); }
-    include './resources/DBconnection/config.php';
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+include './resources/DBconnection/config.php';
 
 if ($_SESSION["U-Email"] == null) {
     echo "<script>window.location = 'Login.php';</script>";
@@ -27,22 +29,21 @@ if ($uid != $currentUser) {
 }
 
 
-if(isset($_GET['id'])){
+if (isset($_GET['id'])) {
     $user = $_GET['id'];
 
-    
+
     $query = "SELECT * FROM chat WHERE sender_userid='$user'";
-    $run = mysqli_query($link,$query);
+    $run = mysqli_query($link, $query);
 
     $data = mysqli_fetch_array($run);
     $_SESSION['user'] =  $user;
 }
 
-if(isset($_POST['sendmsg'])){
+if (isset($_POST['sendmsg'])) {
 
-    $msg = $_POST["message"];
-    
+    $msg = htmlspecialchars($_POST["message"]);
+
     $msgquery = "INSERT INTO `chat`(`sender_userid`, `reciever_userid`, `message`) VALUES ('$uid','$user','$msg')";
-
-    $sendmsg = mysqli_query($link,$msgquery);
+    $sendmsg = mysqli_query($link, $msgquery);
 }
