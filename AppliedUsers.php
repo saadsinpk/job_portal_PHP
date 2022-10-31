@@ -7,8 +7,6 @@ include './resources/template/head/dashHead.php';
 include 'PHPFiles/AppliedUsersPHP.php';
 ?>
 
-
-
 <div class="content-wrapper">
 
     <div class="content-header">
@@ -63,38 +61,58 @@ include 'PHPFiles/AppliedUsersPHP.php';
                                     $total_row = mysqli_num_rows($JobresultNew) + mysqli_num_rows($JobresultNew2);
                                     if ($total_row > 0) {
                                         while ($row = mysqli_fetch_array($JobresultNew)) {
-                                            if(!empty($row["Uid"])) {
-                                        ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $row["FirstName"] . " " . $row["LastName"]; ?>
-                                                </td>
-                                                <td class="text-center">
-                                                    <a href="Messenger.php?id=<?php echo $row["Uid"];?>">CHAT</a>
-                                                </td>
-                                            </tr>
-                                        <?php
-                                            $i++;
+                                            if (!empty($row["Uid"])) {
+                                    ?>
+
+                                                <?php
+
+                                                $checkRole = "SELECT `role` from users WHERE `Uid` = '" . $row["Uid"] . "'";
+                                                $runQuery = mysqli_query($link, $checkRole);
+                                                $getUserRole = mysqli_fetch_array($runQuery);
+                                                if ($getUserRole['role'] == 'admin') {
+                                                ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?php echo $row["FirstName"] . " " . $row["LastName"]; ?> <label> </label> <sup class="text-danger"> Support</sup>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <a class="btn btn-danger" href="Messenger.php?id=<?php echo $row["Uid"]; ?>">CHAT</a>
+                                                        </td>
+                                                    </tr>
+                                                <?php } else { ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?php echo $row["FirstName"] . " " . $row["LastName"]; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <a class="btn btn-primary" href="Messenger.php?id=<?php echo $row["Uid"]; ?>">CHAT</a>
+                                                        </td>
+                                                    </tr>
+
+                                                <?php } ?>
+
+                                            <?php
+                                                $i++;
                                             }
                                         }
                                         while ($row = mysqli_fetch_array($JobresultNew2)) {
-                                        ?>
+                                            ?>
                                             <tr>
                                                 <td>
                                                     <?php echo $row["FirstName"] . " " . $row["LastName"]; ?>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="Messenger.php?id=<?php echo $row["Uid"];?>">CHAT</a>
+                                                    <a class="btn btn-primary" href="Messenger.php?id=<?php echo $row["Uid"]; ?>">CHAT</a>
                                                 </td>
                                             </tr>
-                                        <?php
-                                        $i++;
+                                    <?php
+                                            $i++;
                                         }
                                     } else {
                                         echo "<tr><td>No result found</td><td></td></tr>";
-                                    }   
+                                    }
                                     ?>
-                                </tbody>    
+                                </tbody>
                             </table>
 
                         </div>

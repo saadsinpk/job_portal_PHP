@@ -35,6 +35,9 @@ if ($res['role'] == 'admin') {
     $query = mysqli_query($link, $getTickets);
 } else {
 
-    $getTickets = "SELECT * FROM support WHERE `Uid` = $data";
+    $getTickets = "SELECT userinfo.*, support.*
+    FROM userinfo
+    INNER JOIN support
+    ON userinfo.UserId = $data";
     $query = mysqli_query($link, $getTickets);
 }

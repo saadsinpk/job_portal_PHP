@@ -183,7 +183,7 @@ $result = mysqli_fetch_array($check);
               </li>
               <li class="nav-item menu-open mb-2">
                 <a href="ContactSupport.php" class="nav-link">
-                  <i class="nav-icon fas fa-envelope"></i>
+                  <i class="nav-icon fas fa-info"></i>
                   <p>
                     Contact Support
                   </p>
