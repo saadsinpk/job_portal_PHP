@@ -31,9 +31,10 @@ if ($uid != $currentUser) {
 
 if (isset($_GET['id'])) {
     $user = $_GET['id'];
+    $supp_id = $_GET['supp_id'];
 
 
-    $query = "SELECT * FROM chat WHERE sender_userid='$user'";
+    $query = "SELECT * FROM chat WHERE sender_userid='$user' AND support_id='$supp_id'";
     $run = mysqli_query($link, $query);
 
     $data = mysqli_fetch_array($run);
@@ -47,7 +48,6 @@ if(isset($_GET['supp_id'])){
     $supportQuery = mysqli_query($link, $qu);
     $supportInfo = mysqli_fetch_array($userQuery);
 
-    var_dump($supportInfo);
 }
 
 if (isset($_POST['sendmsg'])) {

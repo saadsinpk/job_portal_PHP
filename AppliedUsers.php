@@ -46,7 +46,7 @@ include 'PHPFiles/AppliedUsersPHP.php';
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th>Name <?= $uid?></th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -133,5 +133,5 @@ include 'PHPFiles/AppliedUsersPHP.php';
 
 <?php
 
-include './resources/template/footer/dashFoot.php';
+include 'resources/template/Footer/dashFoot.php';
 ?>

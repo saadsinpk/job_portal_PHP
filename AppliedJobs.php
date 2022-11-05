@@ -141,5 +141,5 @@ INNER JOIN appliedjobs ON joblist.JobId = appliedjobs.JobId WHERE UserId = $uid"
 
 <?php
 
-include './resources/template/footer/dashFoot.php';
+include 'resources/template/Footer/dashFoot.php';
 ?>

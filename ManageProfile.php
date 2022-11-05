@@ -222,5 +222,5 @@ if ($uid == $data) {
 
 <?php
 
-include './resources/template/footer/dashFoot.php';
+include 'resources/template/Footer/dashFoot.php';
 ?>

@@ -4,6 +4,8 @@ if (!isset($_SESSION)) {
 }
 include './resources/template/head/dashHead.php';
 include 'PHPFiles/AdminDashboardPHP.php';
+
+// echo $_SERVER['SERVER_NAME'];
 ?>
 
 <div class="content-wrapper">
@@ -69,7 +71,7 @@ include 'PHPFiles/AdminDashboardPHP.php';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $userList =  "SELECT users.* , userinfo.* from users INNER JOIN userinfo ON users.Uid = userinfo.UserId";
+                                    <?php $userList =  "SELECT users.* , userinfo.* from users LEFT JOIN userinfo ON userinfo.UserId = users.Uid";
                                     $result = mysqli_query($link, $userList); ?>
                                     <?php while ($row = mysqli_fetch_array($result)) { ?>
                                         <?php
@@ -112,38 +114,67 @@ include 'PHPFiles/AdminDashboardPHP.php';
                                                         <div class="modal-body">
                                                             <div class="post">
                                                                 <div class="user-block">
+                                                                    
                                                                     <img class="img-circle img-bordered-sm" src="images/ProfilePicture/<?php echo $row['ProfileImage']; ?>" alt="User Image">
                                                                     <span class="username">
                                                                         <a href="#"><?php echo $row['FirstName']; ?></a><br>
                                                                         <small><?php echo $row['uemail']; ?>
                                                                     </span>
                                                                 </div>
+                                                                <br>
                                                                 <div class="row mb-3">
-                                                                    <div class="col-sm-6">
-                                                                        <img class="img-fluid" src="images/DrivingLicense/<?php echo $row['DriversLicense']; ?>" alt="Photo">
+                                                                    <div class="col-sm-12 mb-2">
                                                                         <label class="h5 text-center">Divers License</label>
+                                                                        &nbsp;&nbsp;
+                                                                        <?php if(!empty($row['DriversLicense'])) {?>
+                                                                            <a  class='btn btn-primary' download href="images/DrivingLicense/<?php echo $row['DriversLicense']; ?>">Download</a>
+                                                                        <?php } ?>
+                                                                         
+
                                                                     </div>
-                                                                    <div class="col-sm-6">
-                                                                        <img class="img-responsive img-fluid" src="images/SecurityLicense/<?php echo $row['SecurityLicense']; ?>" alt="Photo">
+                                                                    
+                                                                    <div class="col-sm-12  mb-2">
                                                                         <label class="h5 text-center">Security License</label>
+                                                                        &nbsp;&nbsp;
+                                                                        <?php if(!empty($row['SecurityLicense'])) {?>
+                                                                            <a  class='btn btn-primary' download href="images/SecurityLicense/<?php echo $row['SecurityLicense']; ?>">Download</a>
+                                                                        <?php } ?>
+                                                                       
                                                                     </div>
-                                                                    <div class="col-sm-6">
-                                                                        <img class="img-responsive img-fluid" src="images/FirstAid/<?php echo $row['FirstAid']; ?>" alt="Photo">
+                                                                   
+                                                                    <div class="col-sm-12 mb-2">
                                                                         <label class="h5 text-center">First Aid</label>
+                                                                         &nbsp;&nbsp;
+                                                                        <?php if(!empty($row['FirstAid'])) {?>
+                                                                            <a  class='btn btn-primary' download href="images/FirstAid/<?php echo $row['FirstAid']; ?>">Download</a>
+                                                                        <?php } ?>
+
+                                                                         
                                                                     </div>
-                                                                    <div class="col-sm-6">
-                                                                        <img class="img-responsive img-fluid" src="images/CovidVacc/<?php echo $row['CovidVacc']; ?>" alt="Photo">
+                                                                     
+                                                                    <div class="col-sm-12  mb-2">
                                                                         <label class="h5 text-center">Covid Vaccination</label>
+                                                                       &nbsp;&nbsp;
+                                                                        <?php if(!empty($row['CovidVacc'])) {?>
+                                                                            <a  class='btn btn-primary' download href="images/CovidVacc/<?php echo $row['CovidVacc']; ?>">Download</a>
+                                                                        <?php } ?>
+                                                                         
                                                                     </div>
-                                                                    <div class="col-sm-6">
-                                                                        <img class="img-responsive img-fluid" src="images/RSA/<?php echo $row['RSALicense']; ?>" alt="Photo">
+                                                                  
+                                                                    <div class="col-sm-12 mb-2">
                                                                         <label class="h5 text-center">RSA License</label>
+                                                                        &nbsp;&nbsp;
+                                                                        <?php if(!empty($row['RSALicense'])) {?>
+                                                                            <a  class='btn btn-primary' download href="images/RSA/<?php echo $row['RSALicense']; ?>">Download</a>
+                                                                        <?php } ?>
+                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer justify-content-between">
-                                                            <button type="button" class="btn btn-danger">Close</button>
+                                                        <div class="modal-footer justify-content-end">
+                                                             
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" >Close</button>
                                                         </div>
                                                     </div>
 
@@ -193,5 +224,5 @@ include 'PHPFiles/AdminDashboardPHP.php';
 
 <?php
 
-include './resources/template/footer/dashFoot.php';
+include 'resources/template/Footer/dashFoot.php';
 ?>

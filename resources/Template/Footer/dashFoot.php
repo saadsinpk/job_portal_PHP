@@ -1,6 +1,6 @@
 <!-- Main Footer -->
 <footer class="main-footer">
-  <strong>Copyright &copy; 2022-2023 <a href="#">JobPortal</a>.</strong>
+  <strong>Copyright &copy; 2022-2023 <a href="https://sidtechno.com">Sid Techno</a>.</strong>
   All rights reserved.
 </footer>
 </div>
@@ -9,31 +9,31 @@
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="resources\assets\plugins/jquery/jquery.min.js"></script>
+<script src="/resources\assets\plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="resources\assets\plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/resources\assets\plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE -->
-<script src="resources\assets\dist/js/adminlte.js"></script>
+<script src="/resources\assets\dist/js/adminlte.js"></script>
 <!-- OPTIONAL SCRIPTS -->
-<script src="resources\assets\plugins/chart.js/Chart.min.js"></script>
+<script src="/resources\assets\plugins/chart.js/Chart.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="resources\assets\dist/js/pages/dashboard3.js"></script>
+<script src="/resources\assets\dist/js/pages/dashboard3.js"></script>
 <!-- DataTables  & Plugins -->
-<script src="resources\assets\plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="resources\assets\plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="resources\assets\plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="resources\assets\plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="resources\assets\plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="resources\assets\plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="resources\assets\plugins/jszip/jszip.min.js"></script>
-<script src="resources\assets\plugins/pdfmake/pdfmake.min.js"></script>
-<script src="resources\assets\plugins/pdfmake/vfs_fonts.js"></script>
-<script src="resources\assets\plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="resources\assets\plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="resources\assets\plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="/resources\assets\plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/resources\assets\plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/resources\assets\plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/resources\assets\plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/resources\assets\plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/resources\assets\plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/resources\assets\plugins/jszip/jszip.min.js"></script>
+<script src="/resources\assets\plugins/pdfmake/pdfmake.min.js"></script>
+<script src="/resources\assets\plugins/pdfmake/vfs_fonts.js"></script>
+<script src="/resources\assets\plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/resources\assets\plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/resources\assets\plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 
-<script src="resources\assets\plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="/resources\assets\plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 
 <script>
   $(function() {
@@ -42,6 +42,15 @@
       "lengthChange": false,
       "autoWidth": false,
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    
+     $("#example4").DataTable({
+        "order": [[ 4, "desc" ]]
+    });
+    
+    $("#example5").DataTable({
+        "order": [[ 0, "desc" ]]
+    });
+    
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
@@ -104,7 +113,6 @@
     div.scrollTop = div.scrollHeight - div.clientHeight;
   });
 </script>
-
 <!-- 
 <script>
 
@@ -114,10 +122,6 @@
         $("#updateProf").css("display", "inline");
     });
 </script> -->
-
-
-
-
 </body>
 
 </html>

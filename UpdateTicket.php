@@ -64,8 +64,8 @@ include 'PHPFiles/UpdateTicketPHP.php';
                             </select>
                             <input type="hidden" id="status" name="status" value="<?php echo $supportData['status']; ?>">
                         </div>
-                        <div class="form-group">
-                            <input type="submit" name="updateTicket" id="updateTicket" class="btn btn-primary" value="Send message">
+                        <div class="form-group ">
+                            <input type="submit" name="updateTicket" id="updateTicket" class="btn btn-primary w-100" value="Update ticket">
                         </div>
                     </form>
                 </div>
@@ -76,5 +76,5 @@ include 'PHPFiles/UpdateTicketPHP.php';
 </div>
 <!-- /.content-wrapper -->
 <?php
-include './resources/template/footer/dashFoot.php';
+include 'resources/template/Footer/dashFoot.php';
 ?>

@@ -176,6 +176,5 @@ $result = mysqli_query($link, $q);
 </div>
 
 <?php
-
-include './resources/template/footer/dashFoot.php';
+include 'resources/template/Footer/dashFoot.php';
 ?>

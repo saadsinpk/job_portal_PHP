@@ -5,6 +5,8 @@ if (!isset($_SESSION)) {
 include './resources/template/head/dashHead.php';
 include 'PHPFiles/TicketsPHP.php';
 include 'PHPFiles/DeleteTicketPHP.php';
+
+ 
 ?>
 
 <div class="content-wrapper">
@@ -59,15 +61,13 @@ include 'PHPFiles/DeleteTicketPHP.php';
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example5" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Subject</th>
-                                        <th>Message</th>
-                                        <th>Status</th>
                                         <th>Ticket#</th>
+                                        <th>Subject</th>
+                                        <th>Create Date</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -78,33 +78,39 @@ include 'PHPFiles/DeleteTicketPHP.php';
                                         ?>
 
                                             <tr>
-                                                <td><?php echo $row['FirstName'] . $row['LastName'] ?></td>
-                                                <td><?php echo $row['ContactNo'] ?></td>
+                                                
+                                                <td><?php echo $row['ticketno'] ?></td>
                                                 <td><?php echo $row['subject'] ?></td>
-                                                <td><?php echo $row['message'] ?></td>
-                                                <?php if ($row['status'] == 'Open') { ?>
+                                                <td><?= $row['created_at'] ?></td>
+                                                
+                                                <?php if ($row['status'] == 'open') { ?>
                                                     <td class="text-light">
                                                         <button aria-readonly="true" class="btn btn-success"><?php echo $row['status'] ?></button>
                                                     </td>
-                                                <?php } else if ($row['status'] == 'Closed') { ?>
+                                                <?php } else if ($row['status'] == 'closed') { ?>
                                                     <td class="text-light">
                                                         <button aria-readonly="true" class="btn btn-danger"><?php echo $row['status'] ?></button>
                                                     </td>
-                                                <?php } else if ($row['status'] == 'Resolved') { ?>
+                                                <?php } else if ($row['status'] == 'resolved') { ?>
                                                     <td class="text-light">
                                                         <button aria-readonly="true" class="btn btn-warning"><?php echo $row['status'] ?></button>
                                                     </td>
                                                 <?php } ?>
-                                                <td><?php echo $row['ticketno'] ?></td>
                                                 <td>
                                                     <?php if ($res['role'] == 'admin') { ?>
-                                                        <a href="Messenger.php?id=<?php echo $row['Uid'] ?>" title="Contact User"><i class="fa fa-phone text-primary" aria-hidden="true"></i>
-                                                        </a>&nbsp;|
-                                                        <a href="UpdateTicket.php?id=<?php echo $row['supp_id'] ?>" title="Update Ticket"><i class="fa fa-underline text-success" aria-hidden="true"></i>
-                                                        </a>&nbsp;|
+                                                        <a href="Messenger_Support.php?id=<?php echo $row['Uid'] ?>&supp_id=<?= $row['supp_id']?>" title="Contact User"><i class="far fa-comment-dots"></i>
+                                                        </a> |
+                                                        <a href="UpdateTicket.php?id=<?php echo $row['supp_id'] ?>" title="Update Ticket"><i class="fas fa-edit text-success" aria-hidden="true"></i>
+                                                        </a> |
+                                                    <?php } else {?>
+                                                        <a href="Messenger_Support.php?id=2&supp_id=<?= $row['supp_id']?>" title="Contact User"><i class="far fa-comment-dots"></i>
+                                                        </a> |
                                                     <?php } ?>
+                                                    <a href="ticket.php?id=<?php echo $row['supp_id'] ?>" name="ticket"  title="View Ticket"><i class="fas fa-info-circle"></i>
+                                                    </a> |
                                                     <a href="MyTickets.php?id=<?php echo $row['supp_id'] ?>" name="deleteTicket" onclick="return  confirm('do you want to delete Y/N')" title="Remove Ticket"><i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                                     </a>
+                                                    
                                                 </td>
                                             </tr>
                                     <?php }
@@ -126,26 +132,16 @@ include 'PHPFiles/DeleteTicketPHP.php';
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false
-        }).container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
-</script>
+
 
 <?php
-
-include './resources/template/footer/dashFoot.php';
+include 'resources/template/Footer/dashFoot.php';
 ?>
+
+
+<script>
+    $(function() {
+       
+       
+    });
+</script>

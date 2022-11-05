@@ -28,16 +28,9 @@ if ($uid != $data) {
 }
 
 if ($res['role'] == 'admin') {
-    $getTickets = "SELECT userinfo.*, support.*
-        FROM userinfo
-        INNER JOIN support
-        ON userinfo.UserId = support.Uid";
+    $getTickets = "SELECT userinfo.*, support.* FROM support LEFT JOIN userinfo ON userinfo.UId = support.Uid ";
     $query = mysqli_query($link, $getTickets);
 } else {
-
-    $getTickets = "SELECT userinfo.*, support.*
-    FROM userinfo
-    INNER JOIN support
-    ON userinfo.UserId = $data";
+    $getTickets = "SELECT userinfo.*, support.* FROM support LEFT JOIN userinfo ON userinfo.UId = support.Uid WHERE support.Uid = '".$_SESSION['Uid']."'";
     $query = mysqli_query($link, $getTickets);
 }

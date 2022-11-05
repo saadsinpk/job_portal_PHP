@@ -58,21 +58,14 @@ include 'PHPFiles/SupportPHP.php';
             <div class="card-body row d-flex justify-content-center">
                 <div class="col-6">
                     <form method="POST">
-                        <div class="form-group">
-                            <label for="inputName">Name</label>
-                            <input type="text" id="u-name" name="u-name" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputEmail">E-Mail</label>
-                            <input type="email" id="u-email" name="u-email" class="form-control">
-                        </div>
+                         
                         <div class="form-group">
                             <label for="inputSubject">Subject</label>
-                            <input type="text" id="u-subject" name="u-subject" class="form-control">
+                            <input type="text" required id="u-subject" name="u-subject" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="inputMessage">Message</label>
-                            <textarea id="u-message" name="u-message" class="form-control" rows="4"></textarea>
+                            <textarea required id="u-message" name="u-message" class="form-control" rows="4"></textarea>
                         </div>
                         <div class="form-group">
                             <input type="submit" name="sendMessage" class="btn btn-primary" value="Send message">
@@ -86,5 +79,5 @@ include 'PHPFiles/SupportPHP.php';
 </div>
 <!-- /.content-wrapper -->
 <?php
-include './resources/template/footer/dashFoot.php';
+include 'resources/template/Footer/dashFoot.php';
 ?>

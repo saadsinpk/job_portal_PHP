@@ -1,6 +1,13 @@
 <?php
+define('DB_SERVER', '108.167.133.11');
+define('DB_USERNAME', 'hiresecu_db');
+define('DB_PASSWORD', '-mJ.cG@)3fb1');
+define('DB_NAME', 'hiresecu_job_portal');
+ 
+ 
+/* Attempt to connect to MySQL database */
+$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
-$link = mysqli_connect("localhost", "root", "", "hiresecu_job_portal");
 
 if ($_SESSION["U-Email"] == null) {
   echo "<script>window.location = 'Login.php';</script>";
@@ -10,6 +17,8 @@ if ($_SESSION["U-Email"] == null) {
 $q =  "Select * from users Where uemail = '" . $_SESSION["U-Email"] . "'";
 $ch = mysqli_query($link, $q);
 $res = mysqli_fetch_array($ch);
+
+
 
 
 $uid = $res['Uid'];
@@ -181,6 +190,14 @@ $result = mysqli_fetch_array($check);
                   </p>
                 </a>
               </li>
+               <li class="nav-item menu-open mb-2">
+                <a href="MyTickets.php" class="nav-link">
+                  <i class="nav-icon fas fa-ticket-alt"></i>
+                  <p>
+                    My Tickets
+                  </p>
+                </a>
+              </li>
               <li class="nav-item menu-open mb-2">
                 <a href="ContactSupport.php" class="nav-link">
                   <i class="nav-icon fas fa-info"></i>
@@ -189,6 +206,8 @@ $result = mysqli_fetch_array($check);
                   </p>
                 </a>
               </li>
+              
+             
             </ul>
           <?php } ?>
         </nav>

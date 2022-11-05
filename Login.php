@@ -62,9 +62,7 @@ include 'PHPFiles/LoginPHP.php';
 
 					if (isset($_SESSION['regSuccess'])) {
 					?>
-
-						<p class="text-danger text-center"><?php echo $_SESSION['regSuccess']; ?></p>
-
+						<p class="text-success text-center"><?php echo $_SESSION['regSuccess']; ?></p>
 					<?php unset($_SESSION['regSuccess']);
 					} ?>
 

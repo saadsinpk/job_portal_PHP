@@ -2,7 +2,7 @@
 if(!isset($_SESSION)) { session_start(); }
 ob_start();
 include './resources/template/head/dashHead.php';
-include 'PHPFiles/MessengerPHP.php';
+include 'PHPFiles/MessengerSupportPHP.php';
 
 $userData = "SELECT * FROM userinfo WHERE `Uid` = '$user'";
 $userQuery = mysqli_query($link, $userData);
@@ -72,8 +72,9 @@ if(isset($_GET['supp_id'])){
                                     <div id="chatBox" class="direct-chat-messages">
 
                                         <?php
+                                        $supp_id = $_GET['supp_id'];
                                         $i = 0;
-                                        $query = "SELECT * FROM chat WHERE sender_userid = '".$user."' AND reciever_userid = '".$uid."' OR sender_userid = '".$uid."' AND reciever_userid = '".$user."' ";
+                                        $query = "SELECT * FROM chat WHERE sender_userid = '".$user."' AND reciever_userid = '".$uid."' AND support_id='$supp_id' OR sender_userid = '".$uid."' AND reciever_userid = '".$user."' AND support_id='$supp_id' ";
                                         $run = mysqli_query($link, $query);
 
                                         $senderInfo = "SELECT * FROM userinfo WHERE `Uid` = '$uid'";

@@ -21,41 +21,58 @@ $q2 =  "Select * from userinfo Where Uid = '$uid'";
 $check = mysqli_query($link, $q2);
 $result = mysqli_fetch_array($check);
 
+
+$q2 =  "SELECT ticketno FROM `support` ORDER BY supp_id DESC LIMIT 1";
+$check = mysqli_query($link, $q2);
+$support = mysqli_fetch_array($check);
+
+$supportLastTicketNo = ltrim($support['ticketno'],'0');
+
+ 
+$ticketNo = 0;
+
 $data = $result['Uid'];
 
+
+$q =  "Select * from users Where uemail = '" . $_SESSION["U-Email"] . "'";
+$ch = mysqli_query($link, $q);
+$res = mysqli_fetch_array($ch);
+
+$uid = $res['Uid'];
+
+$q2 =  "Select * from userinfo Where Uid = '$uid'";
+$check = mysqli_query($link, $q2);
+$result = mysqli_fetch_array($check);
+
+$name = $result['FirstName'] . " " . $result['LastName'];
+
+
 if (isset($_POST['sendMessage'])) {
-    $name = $_POST['u-name'];
-    $email = $_POST['u-email'];
+    $name = $name;
+    $email = $_SESSION["U-Email"];
     $subject = $_POST['u-subject'];
     $message = $_POST['u-message'];
     $status = "open";
     $userId = $data;
+    $today = date("Y-m-d H:i:s");
 
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $string = '';
-
-    function getRandomString($length = 32) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()';
-        $string = '';
-    
-        for ($i = 0; $i < $length; $i++) {
-            $string .= $characters[mt_rand(0, strlen($characters) - 1)];
-        }
-    
-        return $string;
+    if($supportLastTicketNo > 0){
+        $ticketNo = str_pad($supportLastTicketNo+1, 6, '0', STR_PAD_LEFT);
+    }else{
+        $ticketNo = str_pad(1, 6, '0', STR_PAD_LEFT);
     }
-    
-    $ticketNo = getRandomString();
+     
 
 
-    $msgQuery = "INSERT INTO `support`(`name`, `email`, `subject`, `message`,`status`,`Uid`,`ticketno`) VALUES ('$name','$email','$subject','$message','$status','$userId','$ticketNo')";
+    $msgQuery = "INSERT INTO `support`(`name`, `email`, `subject`, `message`,`status`,`Uid`,`ticketno`,`created_at`) VALUES ('$name','$email','$subject','$message','$status','$userId','$ticketNo','$today')";
     $runQuery = mysqli_query($link, $msgQuery);
 
     if ($runQuery) {
         $_SESSION['message'] = "You're request has been submitted successfully.";
-        echo "<script>window.location = 'MyTickets.php'</script>";
+        // echo "<script>window.location = 'MyTickets.php'</script>";
     } else {
         $_SESSION['message'] = "ERROR SEND REQUEST. TRY AGAIN LATER.";
-        echo "<script>window.location = 'ContactSupport.php'</script>";
+        // echo "<script>window.location = 'ContactSupport.php'</script>";
     }
+       
 }

@@ -6,8 +6,8 @@ server with default setting (user 'root' with no password) */
 // define('DB_PASSWORD', '-mJ.cG@)3fb1');
 // define('DB_NAME', 'hiresecu_job_portal');
 define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
+define('DB_USERNAME', 'hiresecu_db');
+define('DB_PASSWORD', '-mJ.cG@)3fb1');
 define('DB_NAME', 'hiresecu_job_portal');
  
 /* Attempt to connect to MySQL database */

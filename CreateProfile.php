@@ -46,37 +46,37 @@ include 'resources/template/head/head.php';
                 <div class="input-group mb-2">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" name="u-driverLicense" id="u-driverLicense" required>
-                        <label class="custom-file-label" for="exampleInputFile">Driver License</label>
+                        <label class="custom-file-label text_1" for="exampleInputFile">Driver License</label>
                     </div>
                 </div>
                 <div class="input-group mb-2">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" name="u-securityLicense" id="u-securityLicense" required>
-                        <label class="custom-file-label" for="exampleInputFile">Security License</label>
+                        <label class="custom-file-label text_2" for="exampleInputFile">Security License</label>
                     </div>
                 </div>
                 <div class="input-group mb-2">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" name="u-covidVacc" id="u-covidVacc" required>
-                        <label class="custom-file-label" for="exampleInputFile">Covid Vaccination</label>
+                        <label class="custom-file-label text_3" for="exampleInputFile">Covid Vaccination</label>
                     </div>
                 </div>
                 <div class="input-group mb-2">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" name="u-firstAid" id="u-firstAid" required>
-                        <label class="custom-file-label" for="exampleInputFile">First Aid</label>
+                        <label class="custom-file-label text_4" for="exampleInputFile">First Aid</label>
                     </div>
                 </div>
                 <div class="input-group mb-2">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" name="u-RSALicense" id="u-RSALicense" required>
-                        <label class="custom-file-label" for="exampleInputFile">RSA License</label>
+                        <label class="custom-file-label text_5" for="exampleInputFile">RSA License</label>
                     </div>
                 </div>
                 <div class="input-group mb-2">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" name="u-profileImg" id="u-profileImg" required>
-                        <label class="custom-file-label" for="exampleInputFile">Profile Picture</label>
+                        <label class="custom-file-label text_6" for="exampleInputFile">Profile Picture</label>
                     </div>
                 </div>
 
@@ -90,7 +90,47 @@ include 'resources/template/head/head.php';
 
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script>
+    $('#u-driverLicense').on('change',function(){
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.text_1').html(fileName);
+    })
+    $('#u-securityLicense').on('change',function(){
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.text_2').html(fileName);
+    })
+    $('#u-covidVacc').on('change',function(){
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.text_3').html(fileName);
+    })
+    $('#u-firstAid').on('change',function(){
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.text_4').html(fileName);
+    })
+    $('#u-RSALicense').on('change',function(){
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.text_5').html(fileName);
+    })
+    $('#u-profileImg').on('change',function(){
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.text_6').html(fileName);
+    })
+</script>
 
 <?php
 include  'resources/template/footer/footer.php';
+
 ?>
