@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 20, 2022 at 10:26 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+-- Host: localhost:3306
+-- Generation Time: Nov 08, 2022 at 03:43 AM
+-- Server version: 5.7.23-23
+-- PHP Version: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -34,13 +35,6 @@ CREATE TABLE `appliedjobs` (
   `Timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `appliedjobs`
---
-
-INSERT INTO `appliedjobs` (`apId`, `UserId`, `JobId`, `Timestamp`) VALUES
-(1, 2, 1, '2022-10-20 08:16:46');
-
 -- --------------------------------------------------------
 
 --
@@ -51,17 +45,10 @@ CREATE TABLE `chat` (
   `chatid` int(11) NOT NULL,
   `sender_userid` int(11) NOT NULL,
   `reciever_userid` int(11) NOT NULL,
+  `support_id` int(11) DEFAULT NULL,
   `message` text NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `chat`
---
-
-INSERT INTO `chat` (`chatid`, `sender_userid`, `reciever_userid`, `message`, `timestamp`) VALUES
-(1, 2, 1, 'Hello', '2022-10-20 18:27:27'),
-(2, 1, 2, 'Yes HRU?', '2022-10-20 18:27:38');
 
 -- --------------------------------------------------------
 
@@ -79,8 +66,8 @@ CREATE TABLE `joblist` (
   `Description` varchar(255) NOT NULL,
   `MasterLicenseNo` varchar(255) NOT NULL,
   `Status` varchar(50) NOT NULL,
-  `Timestamp` datetime DEFAULT current_timestamp(),
-  `UpdatedOn` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `Timestamp` datetime DEFAULT CURRENT_TIMESTAMP,
+  `UpdatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Uid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -89,8 +76,25 @@ CREATE TABLE `joblist` (
 --
 
 INSERT INTO `joblist` (`JobId`, `Location`, `Days`, `Hours`, `Position`, `Pay`, `Description`, `MasterLicenseNo`, `Status`, `Timestamp`, `UpdatedOn`, `Uid`) VALUES
-(1, 'Karachi', 'Mon,Tue,Wed,Thurs,Fri', '12:00pm - 08:00pm', 'Full Stack', '150000', 'Urgent Required', '1254-6532-4587', 'Available', '2022-10-20 23:11:02', '2022-10-20 20:25:44', 1),
-(2, 'Lahore', 'Mon,Tue,Wed', '7hours', 'Retail Shopping Centre', '25000', 'Urgent Required!', '1254', 'Available', '2022-10-20 23:45:20', '2022-10-20 20:23:34', 2);
+(5, 'Penrith', 'Fri', '0800-1730', 'General Static', '$25', 'Must have a valid security license and first aid.   If available, please reach out to me. Thank you.', '000105818', 'Available', '2022-11-07 22:44:20', '2022-11-08 04:44:20', 24);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `support`
+--
+
+CREATE TABLE `support` (
+  `supp_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `Uid` int(11) NOT NULL,
+  `ticketno` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -117,8 +121,8 @@ CREATE TABLE `userinfo` (
 --
 
 INSERT INTO `userinfo` (`UserId`, `FirstName`, `LastName`, `ContactNo`, `DriversLicense`, `SecurityLicense`, `CovidVacc`, `FirstAid`, `RSALicense`, `ProfileImage`, `Uid`) VALUES
-(1, 'ZEESHAN', 'KHAN', '111111111', 'long-hairstyles-men-header.jpg', 'pump-shotgun.png', 'clipart3569503.png', 'Attachment_1645807549 (1).png', 'Attachment_1645807549.png', 'dotawallpapers.com-dread-retribution-wallpaper-4k-dota-2-2560x1440.jpg', 1),
-(2, 'M.Muzammil', 'Umar Siddiqui', '23215699654', 'rocket-launcher (1).png', 'rocket-launcher.png', 'submachine.png', 'machine-gun.png', 'pngfind.com-csgo-guns-png-6784378.png', 'pump-shotgun.png', 2);
+(2, 'M.Muzammil', 'Umar Siddiqui', '23215699654', 'rocket-launcher (1).png', 'rocket-launcher.png', 'submachine.png', 'machine-gun.png', 'pngfind.com-csgo-guns-png-6784378.png', 'pump-shotgun.png', 2),
+(12, 'rashid', 'mohamed', '0422536585', 'index.jpg', 'index.jpg', 'index.jpg', 'index.jpg', 'index.jpg', 'Rashid1 (2).png', 24);
 
 -- --------------------------------------------------------
 
@@ -130,16 +134,18 @@ CREATE TABLE `users` (
   `Uid` int(11) NOT NULL,
   `uemail` varchar(255) NOT NULL,
   `upassword` varchar(255) NOT NULL,
-  `registrationDate` datetime NOT NULL
+  `registrationDate` datetime NOT NULL,
+  `role` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`Uid`, `uemail`, `upassword`, `registrationDate`) VALUES
-(1, 'user@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2022-10-20 08:07:40'),
-(2, 'user1@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2022-10-20 08:11:39');
+INSERT INTO `users` (`Uid`, `uemail`, `upassword`, `registrationDate`, `role`) VALUES
+(2, 'admin@gmail.com', 'dd6d21c7b99977b203b397b5b48b5d61', '2022-10-20 08:11:39', 'admin'),
+(12, 'support@jobportal.com', 'e10adc3949ba59abbe56e057f20f883e', '2022-10-31 15:55:48', 'admin'),
+(24, 'test@test.com', '200820e3227815ed1756a6b531e7e0d2', '2022-11-07 10:39:45', 'user');
 
 --
 -- Indexes for dumped tables
@@ -164,6 +170,12 @@ ALTER TABLE `joblist`
   ADD PRIMARY KEY (`JobId`);
 
 --
+-- Indexes for table `support`
+--
+ALTER TABLE `support`
+  ADD PRIMARY KEY (`supp_id`);
+
+--
 -- Indexes for table `userinfo`
 --
 ALTER TABLE `userinfo`
@@ -183,31 +195,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appliedjobs`
 --
 ALTER TABLE `appliedjobs`
-  MODIFY `apId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `apId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `chatid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `chatid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `joblist`
 --
 ALTER TABLE `joblist`
-  MODIFY `JobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `JobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `support`
+--
+ALTER TABLE `support`
+  MODIFY `supp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `userinfo`
 --
 ALTER TABLE `userinfo`
-  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `Uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
